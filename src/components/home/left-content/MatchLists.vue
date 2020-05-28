@@ -10,7 +10,7 @@
     </v-row> -->
     <v-row>
       <v-col cols="5">
-        <div class="d-flex align-center justify-center">
+        <div class="d-flex align-center justify-space-around">
           <div class="score primary--text font-weight-thin">
             2
           </div>
@@ -21,8 +21,7 @@
           </div>
           <div class="mr-n4">
             <img
-              height="50"
-              width="50"
+              class="team-img"
               src="../../../assets/img/fc_barcelona.png"
               alt=""
             />
@@ -39,9 +38,13 @@
         </div>
       </v-col>
       <v-col cols="5">
-        <div class="d-flex align-center justify-end">
+        <div class="d-flex align-center justify-space-around">
           <div class="ml-n5">
-            <img src="../../../assets/img/real_madrid.png" alt="" />
+            <img
+              class="team-img"
+              src="../../../assets/img/real_madrid.png"
+              alt=""
+            />
           </div>
           <div class="primary--text team-name mx-4 hidden-sm-and-down">
             曼联（客）
@@ -127,5 +130,18 @@ export default {
 
 .team-name {
   text-align: center;
+}
+
+//mobile
+
+@media only screen and (max-width: 700px) {
+  .score {
+    height: 50pt;
+    width: 50pt;
+  }
+  .team-img {
+    height: 66px;
+    width: 66px;
+  }
 }
 </style>
