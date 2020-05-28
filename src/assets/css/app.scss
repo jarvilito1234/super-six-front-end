@@ -1,0 +1,72 @@
+$primaryBg: #03132e;
+$accent: #31fef9;
+$gradientLinear: linear-gradient(180deg, #37aee1, #197f7d);
+$darkGradientLinear1: linear-gradient(337deg, #03132e, #071b3c);
+$darkGradientLinear2: linear-gradient(343deg, #000b1d, #03132e);
+$matchesLinearGradient: linear-gradient(351deg, #03132e, #071b3c);
+$darkBorder: #28374e;
+$mediaMaxWidth: 1260px;
+$mediaBp1Width: 960px;
+$mediaMinWidth: 480px;
+
+.v-content__wrap {
+  background-color: $primaryBg;
+}
+
+html {
+  background-color: $primaryBg;
+}
+
+.custom-max-width {
+  max-width: 1200px;
+}
+
+.dark-gradient-bg {
+  background-image: $darkGradientLinear1;
+}
+
+.dark-gradient-bg2 {
+  background-image: $darkGradientLinear2;
+}
+
+//buttons
+.gradient-button {
+  background-image: $gradientLinear;
+  border: 0.5px solid $accent;
+}
+
+.button-radius {
+  border-radius: 15px 0px;
+}
+
+.round-corner {
+  border-radius: 30px !important;
+}
+
+.prize-amount-icon {
+  background-color: #ffbf00;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.coin-asset-icon {
+  background-color: $accent;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.border-for-dark {
+  border: 1px solid $darkBorder !important;
+}
+
+.border-for-dark-divider {
+  border-top: 1px solid $darkBorder !important;
+}
+
+.matches-linear-gradient {
+  background-image: $matchesLinearGradient;
+}
