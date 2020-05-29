@@ -1,8 +1,5 @@
 <template>
-  <v-container
-    :style="container"
-    class="matches-linear-gradient d-flex align-center"
-  >
+  <v-container :class="container" class="matches-linear-gradient">
     <!-- <v-row>
       <v-col cols="12" align="center" class="body-1 secondary--text"
         >猜全场</v-col
@@ -10,86 +7,86 @@
     </v-row> -->
     <v-row>
       <v-col cols="5">
-        <div class="d-flex align-center justify-space-around">
-          <div class="score primary--text font-weight-thin">
-            2
+        <div class="d-flex align-center justify-space-around mt-12">
+          <div class="primary--text">
+            <div class="score  font-weight-thin">
+              2
+            </div>
+
+            <div v-show="isMobile" class="body-1 mt-4" align="center">
+              <v-icon>$tv</v-icon>
+            </div>
           </div>
+
           <div class="primary--text team-name hidden-sm-and-down">
             （主）巴塞罗那
             <v-divider></v-divider>
             <v-icon>$tv</v-icon>
           </div>
-          <div class="mr-n4">
-            <img
-              class="team-img"
-              src="../../../assets/img/fc_barcelona.png"
-              alt=""
-            />
+          <div class="mr-n4 d-flex align-center">
+            <div class="primary--text">
+              <img
+                class="team-img mb-3"
+                src="../../../assets/img/fc_barcelona.png"
+                alt=""
+              />
+              <div v-show="isMobile" class="text-no-wrap ml-n2" align="center">
+                (主) 巴塞罗那
+              </div>
+            </div>
           </div>
         </div>
       </v-col>
       <v-col cols="2" class="mx-0">
         <div
-          class="center-text d-flex align-center justify-space-between flex-column mt-n4"
+          class="center-text d-flex align-center justify-space-between flex-column"
         >
-          <div class="body-1 secondary--text text-center ">猜全场</div>
+          <div class="body-1 secondary--text text-center text-no-wrap">
+            猜全场
+          </div>
           <div class="body-1 secondary--text text-center">vs</div>
-          <div class="body-1 secondary--text text-center "><u>分析专家</u></div>
+          <div v-show="!isMobile" class="body-1 secondary--text text-center ">
+            <u>分析专家</u>
+          </div>
         </div>
       </v-col>
       <v-col cols="5">
-        <div class="d-flex align-center justify-space-around">
-          <div class="ml-n5">
+        <div class="d-flex align-center justify-space-around mt-12">
+          <div class=" primary--text">
             <img
-              class="team-img"
+              class="team-img mb-3"
+              :class="{ 'ml-6': isMobile }"
               src="../../../assets/img/real_madrid.png"
               alt=""
             />
+            <div v-show="isMobile" class="text-no-wrap" align="center">
+              (主) 巴塞罗那
+            </div>
           </div>
           <div class="primary--text team-name mx-4 hidden-sm-and-down">
             曼联（客）
             <v-divider></v-divider>
             <v-icon>$tv</v-icon>
           </div>
-          <div class="score primary--text font-weight-thin">
-            0
+          <div class="primary--text">
+            <div class="score  font-weight-thin">
+              0
+            </div>
+            <div v-show="isMobile" class="body-1 mt-4" align="center">
+              <v-icon>$tv</v-icon>
+            </div>
           </div>
         </div>
       </v-col>
-      <!-- <v-col cols="12">
-        <v-row justify="space-around" align="center">
-          <div class="score primary--text font-weight-thin">
-            2
-          </div>
-          <div class="primary--text team-name">
-            （主）巴塞罗那
-            <v-divider></v-divider>
-            <v-icon>$tv</v-icon>
-          </div>
-          <div>
-            <img src="../../../assets/img/fc_barcelona.png" alt="" />
-          </div>
-          <div>
-            <span class="primary--text">vs</span>
-          </div>
-          <div>
-            <img src="../../../assets/img/real_madrid.png" alt="" />
-          </div>
-          <div class="primary--text team-name">
-            曼联（客）
-            <v-divider></v-divider>
-            <v-icon>$tv</v-icon>
-          </div>
-          <div class="score primary--text font-weight-thin">
-            0
-          </div>
-        </v-row>
-        <v-row>
-          <v-col cols="12" align="center" class="body-1 secondary--text "
-            >分析专家</v-col
-          >
-        </v-row>
-      </v-col> -->
+    </v-row>
+    <v-row>
+      <v-col
+        v-show="isMobile"
+        cols="12"
+        align="center"
+        class="body-1 secondary--text"
+        ><u>分析专家</u></v-col
+      >
     </v-row>
   </v-container>
 </template>
@@ -98,7 +95,13 @@
 export default {
   computed: {
     container() {
-      this.$vuetify.breakpoint.smAndDown ? "container-mobile" : "container-web";
+      return this.$vuetify.breakpoint.smAndDown
+        ? "container-mobile"
+        : "container-web";
+    },
+
+    isMobile() {
+      return this.$vuetify.breakpoint.smAndDown;
     },
   },
 };
@@ -121,11 +124,11 @@ export default {
 }
 
 .container-mobile {
-  height: 186px;
+  height: 186pt;
 }
 
 .center-text {
-  height: 140%;
+  height: 100%;
 }
 
 .team-name {
@@ -134,7 +137,7 @@ export default {
 
 //mobile
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 955px) {
   .score {
     height: 50pt;
     width: 50pt;
@@ -142,6 +145,9 @@ export default {
   .team-img {
     height: 66px;
     width: 66px;
+  }
+  .center-text {
+    height: 60%;
   }
 }
 </style>

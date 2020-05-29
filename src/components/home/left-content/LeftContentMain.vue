@@ -21,6 +21,11 @@
       <v-divider class="border-for-dark-divider"></v-divider>
       <MatchLists />
     </v-card>
+    <v-container style="max-width: 80%;">
+      <v-btn block x-large rounded class="gradient-button primary--text mt-4">
+        点击提交
+      </v-btn>
+    </v-container>
   </fragment>
 </template>
 

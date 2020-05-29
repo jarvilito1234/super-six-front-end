@@ -70,3 +70,13 @@ html {
 .matches-linear-gradient {
   background-image: $matchesLinearGradient;
 }
+
+//scrollbar
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #28374e;
+}

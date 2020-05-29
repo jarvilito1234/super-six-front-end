@@ -12,6 +12,7 @@ import ArrowDownIcon from "../icon/ArrowDownIcon";
 import LiveTvIcon from "../icon/LiveTvIcon";
 import ExpandIcon from "../icon/ExpandIcon";
 import CloseButton from "../icon/CloseButton";
+import LinkIcon from "../icon/LinkIcon";
 Vue.use(Vuetify);
 
 export default new Vuetify({
@@ -71,6 +72,10 @@ export default new Vuetify({
 
       close: {
         component: CloseButton,
+      },
+
+      link: {
+        component: LinkIcon,
       },
     },
   },

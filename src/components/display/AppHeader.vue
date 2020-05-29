@@ -28,7 +28,7 @@
       :height="$vuetify.breakpoint.mdAndDown ? '44' : '80'"
       app
       color="transparent"
-      elevate-on-scroll
+      flat
     >
       <v-container class="custom-max-width">
         <v-row class="d-flex align-center">
