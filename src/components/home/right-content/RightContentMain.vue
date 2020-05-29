@@ -19,14 +19,17 @@
     <Players />
     <div class="mx-4"></div>
     <TopPlayers />
+    <div class="mx-4"></div>
+    <Headlines />
   </v-card>
 </template>
 
 <script>
 import Players from "./Players";
 import TopPlayers from "./TopPlayers";
+import Headlines from "./Headlines";
 export default {
-  components: { Players, TopPlayers },
+  components: { Players, TopPlayers, Headlines },
   data() {
     return {};
   },

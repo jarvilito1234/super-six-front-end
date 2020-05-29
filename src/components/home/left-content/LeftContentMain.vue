@@ -21,11 +21,23 @@
       <v-divider class="border-for-dark-divider"></v-divider>
       <MatchLists />
     </v-card>
-    <v-container style="max-width: 80%;">
-      <v-btn block x-large rounded class="gradient-button primary--text mt-4">
+    <v-container
+      :style="isMobile ? 'max-width: 80%;' : 'max-width: 60%;'"
+      class="primary--text text-center"
+    >
+      <v-btn
+        block
+        rounded
+        x-large
+        class="gradient-button primary--text mt-4 headline"
+        :class="{ 'submit-btn': !isMobile }"
+      >
         点击提交
       </v-btn>
     </v-container>
+    <div v-show="!isMobile" class="mt-4 text-no-wrap text-center primary--text">
+      * 一旦提交将不可更改 * 赛果以全场分数为准 * 中奖后3天未领取则视为放弃
+    </div>
   </fragment>
 </template>
 
@@ -35,10 +47,15 @@ import TimeMatch from "./TimeMatch";
 import MatchLists from "./MatchLists";
 export default {
   components: { Fragment, TimeMatch, MatchLists },
+  computed: {
+    isMobile() {
+      return this.$vuetify.breakpoint.smAndDown;
+    },
+  },
 };
 </script>
 
-<style scope lang="scss">
+<style scoped lang="scss">
 .campaign {
   margin-left: -10px;
 }
@@ -58,5 +75,9 @@ export default {
     width: 23pt;
     margin-top: 13px;
   }
+}
+
+.submit-btn {
+  height: 80px !important;
 }
 </style>

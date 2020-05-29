@@ -1,5 +1,6 @@
 <template>
   <v-card
+    flat
     :height="isMobile ? '' : '650px'"
     :color="isMobile ? 'transparent' : 'darkCardBg'"
     class="mt-6 round-corner border-for-dark"

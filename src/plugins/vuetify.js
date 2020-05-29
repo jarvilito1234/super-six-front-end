@@ -13,6 +13,7 @@ import LiveTvIcon from "../icon/LiveTvIcon";
 import ExpandIcon from "../icon/ExpandIcon";
 import CloseButton from "../icon/CloseButton";
 import LinkIcon from "../icon/LinkIcon";
+import SoccerIcon from "../icon/SoccerIcon";
 Vue.use(Vuetify);
 
 export default new Vuetify({
@@ -76,6 +77,10 @@ export default new Vuetify({
 
       link: {
         component: LinkIcon,
+      },
+
+      soccer: {
+        component: SoccerIcon,
       },
     },
   },

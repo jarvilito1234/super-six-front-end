@@ -63,8 +63,8 @@
               (主) 巴塞罗那
             </div>
           </div>
-          <div class="primary--text team-name mx-4 hidden-sm-and-down">
-            曼联（客）
+          <div class="primary--text team-name mx-0 hidden-sm-and-down">
+            皇家马德里（客）
             <v-divider></v-divider>
             <v-icon>$tv</v-icon>
           </div>

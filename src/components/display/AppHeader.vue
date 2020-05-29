@@ -1,6 +1,12 @@
 <template>
   <fragment>
-    <v-system-bar app class="background" height="50" color="secondary--text">
+    <v-system-bar
+      v-if="$route.name !== 'Login'"
+      app
+      class="background"
+      height="50"
+      color="secondary--text"
+    >
       <v-container class="custom-max-width">
         <v-row class="d-flex align-center">
           <div class="d-inline-block text-truncate" style="max-width: 600px;">
@@ -10,7 +16,13 @@
 
           <v-spacer></v-spacer>
           <div class="hidden-sm-and-down">
-            <v-btn rounded outlined small color="secondary" class="mr-2"
+            <v-btn
+              rounded
+              outlined
+              small
+              to="login"
+              color="secondary"
+              class="mr-2"
               >登入</v-btn
             >
             <v-btn rounded outlined small color="secondary" class="mr-6"
@@ -26,7 +38,8 @@
 
     <v-app-bar
       :height="$vuetify.breakpoint.mdAndDown ? '44' : '80'"
-      app
+      :app="$route.name !== 'Login' ? true : false"
+      absolute
       color="transparent"
       flat
     >
@@ -52,7 +65,7 @@
               :value="menu.label"
             >
               <span
-                class="primary--text"
+                class="primary--text subtitle-1"
                 :class="{ 'accent--text': menuActive === menu.label }"
                 >{{ menu.label }}</span
               >
@@ -104,6 +117,10 @@ export default {
 
       menuActive: "首页",
     };
+  },
+
+  mounted() {
+    console.log(this.$route.name);
   },
 };
 </script>

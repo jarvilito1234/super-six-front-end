@@ -20,10 +20,12 @@
               >立即注册</v-btn
             >
           </v-row>
-          <MainContent />
         </div>
       </v-container>
     </div>
+    <v-container class="custom-max-width main-content">
+      <MainContent />
+    </v-container>
   </div>
 </template>
 
@@ -49,12 +51,10 @@ export default {
 <style lang="scss" scoped>
 @mixin heroPosition {
   max-width: 100%;
+  margin-top: -81px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
-.home {
-  margin-top: -80px;
 }
 
 .button-size {
@@ -69,14 +69,23 @@ export default {
 .hero {
   background-image: url("../assets/img/super6_web_home_mainbanner_bg.jpg");
   height: 800px;
+
   @include heroPosition();
 }
 
 .banner-text {
-  margin-top: 250px;
+  margin-top: 230px;
   .banner-text-mobile {
     max-width: 60vw;
   }
+}
+
+.home {
+  margin-bottom: 50px;
+}
+
+.main-content {
+  margin-top: -200px;
 }
 
 @media only screen and (max-width: 800px) {
@@ -89,6 +98,10 @@ export default {
     height: 375px;
   }
 
+  .main-content {
+    margin-top: -90px;
+  }
+
   .button-size {
     margin: 15px 0px 60px 0px;
     width: 80px;
@@ -96,8 +109,8 @@ export default {
     font-size: 15px;
   }
 
-  .home {
-    margin-top: -44px;
-  }
+  // .home {
+  //   // margin-top: -44px;
+  // }
 }
 </style>
