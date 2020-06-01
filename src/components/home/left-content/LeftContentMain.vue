@@ -19,7 +19,7 @@
     <v-card class="mt-4 betting-list round-corner border-for-dark">
       <TimeMatch />
       <v-divider class="border-for-dark-divider"></v-divider>
-      <MatchLists />
+      <MatchLists v-for="(match, index) in matches" :key="index" />
     </v-card>
     <v-container
       :style="isMobile ? 'max-width: 80%;' : 'max-width: 60%;'"
@@ -47,6 +47,42 @@ import TimeMatch from "./TimeMatch";
 import MatchLists from "./MatchLists";
 export default {
   components: { Fragment, TimeMatch, MatchLists },
+  data() {
+    return {
+      matches: [
+        {
+          teamA: "（主）巴塞罗那",
+          teamAImageUrl: require("@/assets/img/fc_barcelona.png"),
+          teamB: "皇家马德里（客）",
+          teamBImageUrl: require("@/assets/img/real_madrid.png"),
+        },
+        {
+          teamA: "（主）巴塞罗那",
+          teamAImageUrl: require("@/assets/img/fc_barcelona.png"),
+          teamB: "皇家马德里（客）",
+          teamBImageUrl: require("@/assets/img/real_madrid.png"),
+        },
+        {
+          teamA: "（主）巴塞罗那",
+          teamAImageUrl: require("@/assets/img/fc_barcelona.png"),
+          teamB: "皇家马德里（客）",
+          teamBImageUrl: require("@/assets/img/real_madrid.png"),
+        },
+        {
+          teamA: "（主）巴塞罗那",
+          teamAImageUrl: require("@/assets/img/fc_barcelona.png"),
+          teamB: "皇家马德里（客）",
+          teamBImageUrl: require("@/assets/img/real_madrid.png"),
+        },
+        {
+          teamA: "（主）巴塞罗那",
+          teamAImageUrl: require("@/assets/img/fc_barcelona.png"),
+          teamB: "皇家马德里（客）",
+          teamBImageUrl: require("@/assets/img/real_madrid.png"),
+        },
+      ],
+    };
+  },
   computed: {
     isMobile() {
       return this.$vuetify.breakpoint.smAndDown;
@@ -75,9 +111,5 @@ export default {
     width: 23pt;
     margin-top: 13px;
   }
-}
-
-.submit-btn {
-  height: 80px !important;
 }
 </style>

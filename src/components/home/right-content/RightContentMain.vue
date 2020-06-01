@@ -7,6 +7,7 @@
         block
         class="dark-gradient-bg border-for-dark"
         rounded
+        @click="termDialog = true"
         ><span
           class="secondary--text"
           :class="{ 'button-text-left': !isMobile }"
@@ -15,6 +16,13 @@
           >$arrowRight</v-icon
         ></v-btn
       >
+      <v-dialog width="600px" v-model="termDialog" scrollable>
+        <Dialog
+          @closeDialog="termDialog = false"
+          :type="'Terms'"
+          :title="'顺超六竞猜活动'"
+        />
+      </v-dialog>
     </v-container>
     <Players />
     <div class="mx-4"></div>
@@ -28,10 +36,13 @@
 import Players from "./Players";
 import TopPlayers from "./TopPlayers";
 import Headlines from "./Headlines";
+import Dialog from "../../dialogs/Dialog";
 export default {
-  components: { Players, TopPlayers, Headlines },
+  components: { Players, TopPlayers, Headlines, Dialog },
   data() {
-    return {};
+    return {
+      termDialog: false,
+    };
   },
 
   computed: {
@@ -47,17 +58,6 @@ export default {
 </script>
 
 <style scoped>
-.button-text-left {
-  position: absolute;
-  left: 0;
-  font-size: 20px;
-}
-
-.header-button-mobile {
-  width: 80%;
-  margin-top: -25px;
-}
-
 .icon-right {
   position: absolute;
   right: 0;

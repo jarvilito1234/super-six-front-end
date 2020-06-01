@@ -1,15 +1,17 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
+import reward from "./reward";
+import auth from "./auth";
+import matches from "./matches";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+const store = new Vuex.Store({
   modules: {
-  }
-})
+    reward,
+    auth,
+    matches,
+  },
+});
+
+export default store;

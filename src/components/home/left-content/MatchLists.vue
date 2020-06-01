@@ -93,6 +93,7 @@
 
 <script>
 export default {
+  
   computed: {
     container() {
       return this.$vuetify.breakpoint.smAndDown

@@ -14,6 +14,13 @@ import ExpandIcon from "../icon/ExpandIcon";
 import CloseButton from "../icon/CloseButton";
 import LinkIcon from "../icon/LinkIcon";
 import SoccerIcon from "../icon/SoccerIcon";
+import MessengerIcon from "../icon/MessengerIcon";
+import SpaceshipIcon from "../icon/SpaceshipIcon";
+import HotIcon from "../icon/HotIcon";
+import LogoutIcon from "../icon/LogoutIcon";
+import AccountIcon from "../icon/AccountIcon";
+import InformationIcon from "../icon/InformationIcon";
+import LinkAccentIcon from "../icon/LinkAccentIcon";
 Vue.use(Vuetify);
 
 export default new Vuetify({
@@ -81,6 +88,31 @@ export default new Vuetify({
 
       soccer: {
         component: SoccerIcon,
+      },
+
+      messenger: {
+        component: MessengerIcon,
+      },
+
+      spaceShip: {
+        component: SpaceshipIcon,
+      },
+
+      hot: {
+        component: HotIcon,
+      },
+      logout: {
+        component: LogoutIcon,
+      },
+      account: {
+        component: AccountIcon,
+      },
+
+      information: {
+        component: InformationIcon,
+      },
+      linkaccent: {
+        component: LinkAccentIcon,
       },
     },
   },

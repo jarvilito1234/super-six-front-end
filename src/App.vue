@@ -1,10 +1,11 @@
 <template>
   <v-app>
-    <AppHeader />
+    <AppHeader v-if="$route.name !== 'Player-center'" />
+    <div class="fill-top-margin"></div>
     <v-content>
       <router-view></router-view>
     </v-content>
-    <AppFooter />
+    <AppFooter v-if="$route.name !== 'Player-center'" />
   </v-app>
 </template>
 

@@ -42,16 +42,27 @@ export default {
     },
   },
   mounted: function() {
-    console.log(this.$vuetify.breakpoint);
+    if (this.$route.query.access && !this.$store.getters["auth/isAuth"]) {
+      this.$store.dispatch("auth/retrieveToken", {
+        access: this.$route.query.access,
+      });
+    }
+
+    this.$store.getters["auth/isAuth"] ? this.getMatches() : "";
   },
   components: { MainContent },
+
+  methods: {
+    getMatches() {
+      this.$store.dispatch("matches/getAllMatches");
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 @mixin heroPosition {
   max-width: 100%;
-  margin-top: -81px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -78,10 +89,6 @@ export default {
   .banner-text-mobile {
     max-width: 60vw;
   }
-}
-
-.home {
-  margin-bottom: 50px;
 }
 
 .main-content {

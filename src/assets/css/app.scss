@@ -4,6 +4,9 @@ $gradientLinear: linear-gradient(180deg, #37aee1, #197f7d);
 $darkGradientLinear1: linear-gradient(337deg, #03132e, #071b3c);
 $darkGradientLinear2: linear-gradient(343deg, #000b1d, #03132e);
 $matchesLinearGradient: linear-gradient(351deg, #03132e, #071b3c);
+$rewardLinearGradient: linear-gradient(180deg, #071b3c, #03132e);
+
+$drawerGradient: linear-gradient(180deg, #37aee1, #197f7d);
 $darkBorder: #28374e;
 $mediaMaxWidth: 1260px;
 $mediaBp1Width: 960px;
@@ -15,6 +18,20 @@ $mediaMinWidth: 480px;
 
 html {
   background-color: $primaryBg;
+}
+
+.home {
+  margin-bottom: 50px;
+}
+
+.fill-top-margin {
+  background-color: $primaryBg;
+  width: 100vw;
+  margin-top: -80px;
+}
+
+.fill-main {
+  margin-top: 80px;
 }
 
 .custom-max-width {
@@ -35,6 +52,10 @@ html {
   border: 0.5px solid $accent;
 }
 
+.submit-btn {
+  height: 80px !important;
+}
+
 .button-radius {
   border-radius: 15px 0px;
 }
@@ -45,6 +66,17 @@ html {
 
 .round-corner {
   border-radius: 30px !important;
+}
+
+.button-text-left {
+  position: absolute;
+  left: 0;
+  font-size: 20px;
+}
+
+.header-button-mobile {
+  width: 80%;
+  margin-top: -25px;
 }
 
 .prize-amount-icon {
@@ -83,4 +115,44 @@ html {
 
 ::-webkit-scrollbar-thumb {
   background: #28374e;
+}
+
+// dialog
+
+.border-dialog {
+  border-radius: 30px !important;
+  background-color: #03132e !important;
+}
+
+.dialog-title {
+  background-color: #000618 !important;
+  height: 80px;
+  display: flex;
+  padding: 10px 10px 10px 50px !important;
+  justify-content: space-between;
+}
+
+.dialog-content {
+  padding: 30px !important;
+  font-size: 16px;
+  // overflow: hidden;
+  // overflow-y: scroll;
+}
+
+//reward
+
+.reward-linear-gradient {
+  background-image: $rewardLinearGradient;
+}
+
+//drawer
+
+.drawer-style {
+  margin-top: 80px;
+  border-radius: 30px 30px 0px 0px !important;
+  background-image: $drawerGradient !important;
+}
+
+.list {
+  border: 1px solid #31fef9;
 }

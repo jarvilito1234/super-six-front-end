@@ -20,7 +20,8 @@
               rounded
               outlined
               small
-              to="login"
+              link
+              href="http://35.221.216.24/login?redirect_url=http://localhost:8080"
               color="secondary"
               class="mr-2"
               >登入</v-btn
@@ -39,7 +40,7 @@
     <v-app-bar
       :height="$vuetify.breakpoint.mdAndDown ? '44' : '80'"
       :app="$route.name !== 'Login' ? true : false"
-      absolute
+      :absolute="$route.name === 'Login' ? true : false"
       color="transparent"
       flat
     >
@@ -60,6 +61,8 @@
             group
           >
             <v-btn
+              exact
+              :to="menu.link"
               v-for="(menu, index) in menus"
               :key="index"
               :value="menu.label"
@@ -97,21 +100,27 @@ export default {
       menus: [
         {
           label: "首页",
+          link: "/",
         },
         {
           label: "超六预测",
+          link: "/",
         },
         {
           label: "顺币兑换",
+          link: "rewards",
         },
         {
           label: "赛事直播",
+          link: "/",
         },
         {
           label: "体育新闻",
+          link: "/",
         },
         {
           label: "我的战绩史",
+          link: "/",
         },
       ],
 

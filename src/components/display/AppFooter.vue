@@ -1,14 +1,28 @@
 <template>
   <v-footer v-if="$route.name !== 'Login'" padless>
+    <SpeedDial v-if="!isMobile" />
+    <v-btn
+      v-else
+      x-large
+      absolute
+      text
+      fab
+      class="back-to-top-btn"
+      right
+      @click="toTop"
+      color="secondary"
+    >
+      <v-icon>mdi-arrow-up</v-icon>
+    </v-btn>
     <v-card
       flat
       tile
       width="100%"
-      height="149pt"
+      :height="!isMobile ? '200px' : ''"
       class="text-center primary--text d-flex align-center"
       color="#000618"
     >
-      <v-container class="custom-max-width mt-12">
+      <v-container class="custom-max-width">
         <v-row>
           <v-col cols="12" md="4">
             <div
@@ -21,7 +35,10 @@
             </div>
           </v-col>
           <v-col cols="12" md="6" :offset="!isMobile ? '2' : ''">
-            <div :align="!isMobile ? 'end' : ''" class="title secondary--text">
+            <div
+              :align="!isMobile ? 'end' : ''"
+              class="subtitle secondary--text"
+            >
               版权所有 ©2020 Super6 保留所有权
             </div>
           </v-col>
@@ -34,8 +51,12 @@
 </template>
 
 <script>
+import SpeedDial from "./SpeedDial";
 export default {
   computed: {
+    getYOffset() {
+      return window.pageYOffset;
+    },
     isMobile() {
       return this.$vuetify.breakpoint.smAndDown;
     },
@@ -48,7 +69,20 @@ export default {
       return [];
     },
   },
+
+  components: { SpeedDial },
+
+  methods: {
+    toTop() {
+      this.$vuetify.goTo(0);
+    },
+  },
 };
 </script>
 
-<style></style>
+<style scoped>
+.back-to-top-btn {
+  bottom: 3px;
+  right: 1px;
+}
+</style>

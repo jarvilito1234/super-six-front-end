@@ -24,6 +24,25 @@ const routes = [
     name: "Login",
     component: () => import("../views/Login.vue"),
   },
+
+  {
+    path: "/rewards",
+    name: "Rewards",
+    component: () => import("../views/Rewards.vue"),
+  },
+
+  {
+    path: "/player-center",
+    name: "Player-center",
+    component: () => import("../views/player-center/Home.vue"),
+    children: [
+      {
+        path: "/",
+        name: "Player-center",
+        component: () => import("@/components/display/player-center/Index.vue"),
+      },
+    ],
+  },
 ];
 
 const router = new VueRouter({
