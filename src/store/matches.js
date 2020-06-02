@@ -2,21 +2,39 @@ import axios from "axios";
 export default {
   namespaced: true,
   state: {
+    announcement: "",
+    event: {
+      category: {
+        name: "",
+      },
+    },
     matches: [],
   },
-  getters: {},
-  mutations: {},
+  getters: {
+    matches: (state) => state.matches,
+    event: (state) => state.event,
+    // bearer: (state, getters, rootState) => `Bearer ${rootState.auth.token}`,
+  },
+  mutations: {
+    setDatas(state, payload) {
+      // console.log(payload.);
+      console.log(payload.matches);
+      state.event = payload.event;
+      state.matches = payload.matches;
+    },
+  },
   actions: {
     async getAllMatches(context) {
-      axios.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${context.rootState.auth.token}`;
+      console.log(context.rootGetters["auth/bearer"]);
+      axios.defaults.headers.common["Authorization"] =
+        context.rootGetters["auth/bearer"];
 
       await axios
         .get(`${context.rootState.auth.backendUrl}/api/matches`)
         .then((response) => {
-          console.log(response.data);
-          //   context.commit('setAllMatches', {payload: response.data})
+          const data = response.data.data;
+          // console.log(data);
+          context.commit("setDatas", data);
         });
     },
   },

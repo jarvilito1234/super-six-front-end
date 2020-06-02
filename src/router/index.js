@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import store from "../store";
 
 Vue.use(VueRouter);
 
@@ -49,6 +50,15 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  if (!to.query.access && !store.getters["auth/isAuth"])
+    window.location = `${store.state.auth.backendUrl}/login?redirect_url=http://localhost:8080`;
+  // next({
+  //   path: `${store.state.auth.backendUrl}/login?redirect_url=http://localhost:8080`,
+  // });
+  else next();
 });
 
 export default router;

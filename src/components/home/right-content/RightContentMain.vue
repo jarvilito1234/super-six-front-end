@@ -51,7 +51,7 @@ export default {
     },
 
     headerButton() {
-      return this.isMobile ? "header-button-mobile" : "";
+      return this.isMobile ? "header-button-mobile" : "px-0";
     },
   },
 };

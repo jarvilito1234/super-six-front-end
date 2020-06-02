@@ -2,7 +2,7 @@
   <fragment>
     <AppHeader />
     <div class="d-flex">
-      <Drawer />
+      <Drawer v-if="!isMobile" />
       <v-content>
         <router-view></router-view>
       </v-content>
@@ -18,6 +18,11 @@ export default {
   components: { AppHeader, Fragment, Drawer },
   mounted() {
     console.log(this.$route.name);
+  },
+  computed: {
+    isMobile() {
+      return this.$vuetify.breakpoint.smAndDown;
+    },
   },
 };
 </script>

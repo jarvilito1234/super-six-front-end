@@ -17,9 +17,13 @@
       >
     </div>
     <v-card class="mt-4 betting-list round-corner border-for-dark">
-      <TimeMatch />
+      <TimeMatch :event="event" />
       <v-divider class="border-for-dark-divider"></v-divider>
-      <MatchLists v-for="(match, index) in matches" :key="index" />
+      <MatchLists
+        v-for="(match, index) in matches"
+        :key="index"
+        :match="match"
+      />
     </v-card>
     <v-container
       :style="isMobile ? 'max-width: 80%;' : 'max-width: 60%;'"
@@ -48,44 +52,29 @@ import MatchLists from "./MatchLists";
 export default {
   components: { Fragment, TimeMatch, MatchLists },
   data() {
-    return {
-      matches: [
-        {
-          teamA: "（主）巴塞罗那",
-          teamAImageUrl: require("@/assets/img/fc_barcelona.png"),
-          teamB: "皇家马德里（客）",
-          teamBImageUrl: require("@/assets/img/real_madrid.png"),
-        },
-        {
-          teamA: "（主）巴塞罗那",
-          teamAImageUrl: require("@/assets/img/fc_barcelona.png"),
-          teamB: "皇家马德里（客）",
-          teamBImageUrl: require("@/assets/img/real_madrid.png"),
-        },
-        {
-          teamA: "（主）巴塞罗那",
-          teamAImageUrl: require("@/assets/img/fc_barcelona.png"),
-          teamB: "皇家马德里（客）",
-          teamBImageUrl: require("@/assets/img/real_madrid.png"),
-        },
-        {
-          teamA: "（主）巴塞罗那",
-          teamAImageUrl: require("@/assets/img/fc_barcelona.png"),
-          teamB: "皇家马德里（客）",
-          teamBImageUrl: require("@/assets/img/real_madrid.png"),
-        },
-        {
-          teamA: "（主）巴塞罗那",
-          teamAImageUrl: require("@/assets/img/fc_barcelona.png"),
-          teamB: "皇家马德里（客）",
-          teamBImageUrl: require("@/assets/img/real_madrid.png"),
-        },
-      ],
-    };
+    return {};
+  },
+
+  created() {
+    this.$store.getters["auth/isAuth"] ? this.getMatches() : "";
+  },
+
+  methods: {
+    getMatches() {
+      this.$store.dispatch("matches/getAllMatches");
+    },
   },
   computed: {
     isMobile() {
       return this.$vuetify.breakpoint.smAndDown;
+    },
+
+    event() {
+      return this.$store.getters["matches/event"];
+    },
+
+    matches() {
+      return this.$store.getters["matches/matches"];
     },
   },
 };

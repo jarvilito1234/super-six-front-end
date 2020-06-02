@@ -1,90 +1,103 @@
 <template>
   <v-container :class="container" class="matches-linear-gradient">
-    <!-- <v-row>
-      <v-col cols="12" align="center" class="body-1 secondary--text"
-        >猜全场</v-col
-      >
-    </v-row> -->
+    <v-row>
+      <v-col class="text-center secondary--text">猜全场</v-col>
+    </v-row>
     <v-row>
       <v-col cols="5">
-        <div class="d-flex align-center justify-space-around mt-12">
-          <div class="primary--text">
-            <div class="score  font-weight-thin">
-              2
-            </div>
+        <div
+          class="d-flex justify-space-around"
+          :class="{ 'align-center': !isMobile }"
+        >
+          <div class="primary--text font-weight-thin">
+            <v-text-field
+              :height="isMobile ? '66' : '100'"
+              dark
+              class="score-input"
+              placeholder="0"
+              outlined
+              rounded
+            ></v-text-field>
 
-            <div v-show="isMobile" class="body-1 mt-4" align="center">
+            <div v-show="isMobile" class="body-1 mt-n2" align="center">
               <v-icon>$tv</v-icon>
             </div>
           </div>
 
           <div class="primary--text team-name hidden-sm-and-down">
-            （主）巴塞罗那
+            {{ match.team1.chinese_name || match.team1.name }}
             <v-divider></v-divider>
             <v-icon>$tv</v-icon>
           </div>
-          <div class="mr-n4 d-flex align-center">
-            <div class="primary--text">
+
+          <div class="mr-n10 d-flex flex-column">
+            <div class="primary--text text-center">
               <img
-                class="team-img mb-3"
-                src="../../../assets/img/fc_barcelona.png"
+                class="team-img mb-4"
+                :src="match.team1.image"
                 alt=""
+                :width="isMobile ? '50pt' : '100px'"
+                :height="isMobile ? '50pt' : '100px'"
               />
-              <div v-show="isMobile" class="text-no-wrap ml-n2" align="center">
-                (主) 巴塞罗那
+              <div v-show="isMobile" class=" ml-n2" align="center">
+                {{ match.team1.chinese_name || match.team1.name }}
               </div>
             </div>
           </div>
         </div>
       </v-col>
-      <v-col cols="2" class="mx-0">
+      <v-col cols="2" class="">
         <div
-          class="center-text d-flex align-center justify-space-between flex-column"
+          class="center-text d-flex align-center justify-center flex-column "
         >
-          <div class="body-1 secondary--text text-center text-no-wrap">
-            猜全场
-          </div>
           <div class="body-1 secondary--text text-center">vs</div>
-          <div v-show="!isMobile" class="body-1 secondary--text text-center ">
-            <u>分析专家</u>
-          </div>
         </div>
       </v-col>
       <v-col cols="5">
-        <div class="d-flex align-center justify-space-around mt-12">
-          <div class=" primary--text">
-            <img
-              class="team-img mb-3"
-              :class="{ 'ml-6': isMobile }"
-              src="../../../assets/img/real_madrid.png"
-              alt=""
-            />
-            <div v-show="isMobile" class="text-no-wrap" align="center">
-              (主) 巴塞罗那
+        <div
+          class="d-flex  justify-space-around"
+          :class="{ 'align-center': !isMobile }"
+        >
+          <div class="d-flex flex-column">
+            <div class="primary--text text-center ml-n10">
+              <!-- :class="{ 'ml-0': isMobile, 'ml-n12': !isMobile }" -->
+              <img
+                class="team-img mb-4"
+                :width="isMobile ? '50pt' : '100px'"
+                :height="isMobile ? '50pt' : '100px'"
+                :src="match.team2.image"
+                alt=""
+              />
+              <div v-show="isMobile" class="">
+                {{ match.team2.chinese_name || match.team2.name }}
+              </div>
             </div>
           </div>
           <div class="primary--text team-name mx-0 hidden-sm-and-down">
-            皇家马德里（客）
+            {{ match.team2.chinese_name || match.team2.name }}
             <v-divider></v-divider>
             <v-icon>$tv</v-icon>
           </div>
-          <div class="primary--text">
-            <div class="score  font-weight-thin">
-              0
+          <div>
+            <div class="primary--text font-weight-thin">
+              <v-text-field
+                :height="isMobile ? '66' : '100'"
+                dark
+                class="score-input"
+                placeholder="0"
+                outlined
+                rounded
+              ></v-text-field>
             </div>
-            <div v-show="isMobile" class="body-1 mt-4" align="center">
+            <div v-show="isMobile" class="body-1 mt-n2" align="center">
               <v-icon>$tv</v-icon>
             </div>
           </div>
         </div>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col
-        v-show="isMobile"
-        cols="12"
-        align="center"
-        class="body-1 secondary--text"
+    <v-row class="mt-n5">
+      <v-col cols="12" align="center" class="body-1 secondary--text"
         ><u>分析专家</u></v-col
       >
     </v-row>
@@ -93,7 +106,13 @@
 
 <script>
 export default {
-  
+  data() {
+    return {
+      form: {},
+    };
+  },
+  props: ["match"],
+
   computed: {
     container() {
       return this.$vuetify.breakpoint.smAndDown
@@ -109,15 +128,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.score {
-  display: flex;
-  font-size: 50px;
-  align-items: center;
-  justify-content: center;
-  height: 100px;
+::v-deep .score-input {
   width: 100px;
-  border-radius: 30px;
-  border: 1px solid #28374e;
+  padding: 10px;
+  font-size: 43px;
+  input {
+    text-align: center !important;
+  }
 }
 
 .container-web {
@@ -139,9 +156,9 @@ export default {
 //mobile
 
 @media only screen and (max-width: 955px) {
-  .score {
-    height: 50pt;
+  .score-input {
     width: 50pt;
+    font-size: 30px;
   }
   .team-img {
     height: 66px;

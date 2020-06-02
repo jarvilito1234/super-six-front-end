@@ -9,19 +9,23 @@
     >
       <v-container class="custom-max-width">
         <v-row class="d-flex align-center">
-          <div class="d-inline-block text-truncate" style="max-width: 600px;">
+          <div
+            class="d-inline-block text-truncate"
+            v-if="dataLoaded"
+            style="max-width: 600px;"
+          >
             <v-icon class="mr-2">$soundUp</v-icon>
-            恭喜Lekso狂抱88,888元预测大奖！+888顺币奖励！（活动期 #0021542）
+            {{ announcement.announcement }}
           </div>
 
           <v-spacer></v-spacer>
-          <div class="hidden-sm-and-down">
+          <div v-if="!$vuetify.breakpoint.smAndDown" class="d-flex">
             <v-btn
               rounded
               outlined
               small
               link
-              href="http://35.221.216.24/login?redirect_url=http://localhost:8080"
+              :href="loginLink"
               color="secondary"
               class="mr-2"
               >登入</v-btn
@@ -29,9 +33,63 @@
             <v-btn rounded outlined small color="secondary" class="mr-6"
               >立即注册</v-btn
             >
+            <div style="position: relative;">
+              <v-icon class="mr-4" @click="qrLink = !qrLink">$phoneLink</v-icon>
+              <!-- qr dialog -->
+              <div
+                class="round-corner my-0 qr-popup primary--text"
+                :class="{ 'qr-popup-open': qrLink }"
+              >
+                <v-container class="mt-0 font-weight-bold">
+                  <v-row cols="6">
+                    <v-col
+                      cols="6"
+                      class="d-flex flex-column justify-center align-center"
+                    >
+                      <div>IOS</div>
+                      <div class="subtitle">1.6.3</div>
+                      <img
+                        class=""
+                        src="@/assets/img/qr/qr.png"
+                        height="100"
+                        width="100"
+                      />
+                      <div>扫码下载</div>
+                    </v-col>
+                    <v-col
+                      cols="6"
+                      class="d-flex flex-column justify-center align-center"
+                    >
+                      <div>IOS</div>
+                      <div class="subtitle">1.6.3</div>
+                      <img
+                        class="my-1"
+                        src="@/assets/img/qr/qr.png"
+                        height="100"
+                        width="100"
+                      />
+                      <div>扫码下载</div>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </div>
+            </div>
+            <div class="chat-link">
+              <v-icon @click="chat = !chat">$chat</v-icon>
 
-            <v-icon class="mr-4">$phoneLink</v-icon>
-            <v-icon>$chat</v-icon>
+              <!-- chat link -->
+              <div
+                class="round-corner my-0 chat-popup primary--text"
+                :class="{ 'chat-popup-open': chat }"
+              >
+                <v-card dark flat class="transparent mt-1 ml-4">
+                  <v-card-subtitle> 客服热线</v-card-subtitle>
+                  <v-card-text class="d-flex align-center mt-n4 body-1"
+                    ><v-icon class="mr-2">$chat</v-icon>008445</v-card-text
+                  >
+                </v-card>
+              </div>
+            </div>
           </div>
         </v-row>
       </v-container>
@@ -97,6 +155,8 @@ export default {
   components: { Fragment, ExpandMenu },
   data() {
     return {
+      qrLink: false,
+      chat: false,
       menus: [
         {
           label: "首页",
@@ -104,7 +164,7 @@ export default {
         },
         {
           label: "超六预测",
-          link: "/",
+          link: "/w",
         },
         {
           label: "顺币兑换",
@@ -112,24 +172,47 @@ export default {
         },
         {
           label: "赛事直播",
-          link: "/",
+          link: "/e",
         },
         {
           label: "体育新闻",
-          link: "/",
+          link: "/s",
         },
         {
           label: "我的战绩史",
-          link: "/",
+          link: "/d",
         },
       ],
 
       menuActive: "首页",
     };
   },
+  computed: {
+    loginLink() {
+      return `${this.$store.state.auth.backendUrl}/login?redirect_url=http://localhost:8080`;
+    },
 
-  mounted() {
-    console.log(this.$route.name);
+    dataLoaded() {
+      return this.$store.state.general.dataLoaded;
+    },
+
+    announcement() {
+      return this.$store.getters["general/lastAnnouncement"];
+    },
+  },
+
+  watch: {
+    qrLink() {
+      this.qrLink ? (this.chat = false) : "";
+    },
+
+    chat() {
+      this.chat ? (this.qrLink = false) : "";
+    },
+  },
+
+  created() {
+    this.$store.dispatch("general/getAnnouncement");
   },
 };
 </script>
@@ -141,5 +224,45 @@ export default {
 
 .app-bar {
   margin-top: 50px !important;
+}
+
+.qr-popup {
+  width: 290px;
+  height: 220px;
+  transition: 0.5s;
+  position: absolute;
+  border: 1px solid #aabbd0;
+  top: -300px;
+  right: 0;
+  background-color: rgba(144, 144, 144, 0.3);
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(30px) !important;
+}
+
+.qr-popup-open {
+  top: 50px;
+  transition: 0.4s;
+  transition-timing-function: ease-in-out;
+}
+.chat-link {
+  position: relative;
+  .chat-popup {
+    width: 163px;
+    height: 90px;
+    transition: 0.5s;
+    position: absolute;
+    border: 1px solid #aabbd0;
+    top: -230px;
+    right: -40px;
+    background-color: rgba(116, 112, 112, 0.4);
+    backdrop-filter: blur(30px) !important;
+    -webkit-backdrop-filter: blur(30px) !important;
+  }
+
+  .chat-popup-open {
+    top: 80px;
+    transition: 0.4s;
+    transition-timing-function: ease-in-out;
+  }
 }
 </style>

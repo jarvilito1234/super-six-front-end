@@ -21,6 +21,9 @@ import LogoutIcon from "../icon/LogoutIcon";
 import AccountIcon from "../icon/AccountIcon";
 import InformationIcon from "../icon/InformationIcon";
 import LinkAccentIcon from "../icon/LinkAccentIcon";
+import FirstPageIcon from "../icon/FirstPageIcon";
+import LastPageIcon from "../icon/LastPageIcon";
+
 Vue.use(Vuetify);
 
 export default new Vuetify({
@@ -113,6 +116,12 @@ export default new Vuetify({
       },
       linkaccent: {
         component: LinkAccentIcon,
+      },
+      firstPage: {
+        component: FirstPageIcon,
+      },
+      lastPage: {
+        component: LastPageIcon,
       },
     },
   },

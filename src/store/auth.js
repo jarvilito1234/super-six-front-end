@@ -2,12 +2,13 @@ import axios from "axios";
 export default {
   namespaced: true,
   state: {
-    backendUrl: "http://35.221.216.24",
+    backendUrl: "http://api.diablo88.org",
     token: localStorage.getItem("token") || "",
   },
 
   getters: {
     isAuth: (state) => !!state.token,
+    bearer: (state) => `Bearer ${state.token}`,
   },
   mutations: {
     setToken(state, token) {
@@ -30,3 +31,5 @@ export default {
     },
   },
 };
+
+// http://35.221.216.24/login?redirect_url=http://localhost:8080

@@ -46,17 +46,13 @@ export default {
       this.$store.dispatch("auth/retrieveToken", {
         access: this.$route.query.access,
       });
-    }
 
-    this.$store.getters["auth/isAuth"] ? this.getMatches() : "";
+      this.$route.replace("/");
+    }
   },
   components: { MainContent },
 
-  methods: {
-    getMatches() {
-      this.$store.dispatch("matches/getAllMatches");
-    },
-  },
+  methods: {},
 };
 </script>
 

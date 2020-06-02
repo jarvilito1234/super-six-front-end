@@ -1,5 +1,6 @@
 <template>
-  <v-card id="nav" class="drawer-style ml-4" width="250px" height="93vh">
+  <v-card id="nav" class="drawer-style ml-4" width="250px" height="100vh">
+    <div class="pt-4"></div>
     <v-list rounded dark class="transparent list group-height ">
       <v-list-item-group>
         <v-list-group
@@ -123,8 +124,8 @@ export default {
 
 .group-height {
   /* height: 900px; */
-  max-height: 93vh !important;
+  max-height: 91vh !important;
   overflow: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 </style>
