@@ -14,6 +14,12 @@ export default {
     setToken(state, token) {
       state.token = token;
     },
+
+    logOut(state) {
+      state.token = "";
+      localStorage.removeItem("token");
+      window.location = `${process.env.VUE_APP_API_ROOT_URL}/logout?redirect_url=${process.env.VUE_APP_ROOT_URL}`;
+    },
   },
   actions: {
     async retrieveToken(context, access) {
@@ -26,7 +32,7 @@ export default {
           context.commit("setToken", token);
         })
         .catch((err) => {
-          window.location = `${store.state.auth.backendUrl}/login?redirect_url=http://localhost:8080`;
+          window.location = `${context.state.backendUrl}/login?redirect_url=${process.env.VUE_APP_ROOT_URL}`;
         });
     },
   },

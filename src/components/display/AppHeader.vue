@@ -25,12 +25,18 @@
               outlined
               small
               link
-              :href="loginLink"
+              @click="logOutLink"
               color="secondary"
               class="mr-2"
               >登入</v-btn
             >
-            <v-btn rounded outlined small color="secondary" class="mr-6"
+            <v-btn
+              rounded
+              outlined
+              small
+              color="secondary"
+              class="mr-6"
+              v-if="!this.$store.getters['auth/isAuth']"
               >立即注册</v-btn
             >
             <div style="position: relative;">
@@ -187,11 +193,13 @@ export default {
       menuActive: "首页",
     };
   },
-  computed: {
-    loginLink() {
-      return `${this.$store.state.auth.backendUrl}/login?redirect_url=http://localhost:8080`;
-    },
 
+  methods: {
+    logOutLink() {
+      this.$store.commit("auth/logOut");
+    },
+  },
+  computed: {
     dataLoaded() {
       return this.$store.state.general.dataLoaded;
     },

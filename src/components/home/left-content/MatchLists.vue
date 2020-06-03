@@ -14,7 +14,7 @@
               :height="isMobile ? '66' : '100'"
               dark
               maxlength="2"
-              v-model="form.value"
+              v-model="score1"
               @keypress="isNumber($event)"
               type="text"
               class="score-input"
@@ -87,6 +87,8 @@
               <v-text-field
                 :height="isMobile ? '66' : '100'"
                 dark
+                v-model="score2"
+                @keypress="isNumber($event)"
                 class="score-input"
                 placeholder="0"
                 outlined
@@ -110,14 +112,17 @@
 
 <script>
 export default {
+  props: ["match"],
   data() {
     return {
       form: {
-        value: "",
+        pointsOne: "",
+        pointsTwo: "",
       },
+      match1ObjectName: `match[${this.match.id}][score_1]`,
+      match2ObjectName: `match[${this.match.id}][score_2]`,
     };
   },
-  props: ["match"],
 
   computed: {
     container() {
@@ -128,6 +133,36 @@ export default {
 
     isMobile() {
       return this.$vuetify.breakpoint.smAndDown;
+    },
+
+    score1: {
+      get() {
+        return this.$store.getters["matches/getSelectedMatch"](this.match.id)[
+          this.match1ObjectName
+        ];
+      },
+
+      set(value) {
+        this.$store.commit("matches/updatePrediction", {
+          objectName: this.match1ObjectName,
+          value,
+          id: this.match.id,
+        });
+      },
+    },
+    score2: {
+      get() {
+        return this.$store.getters["matches/getSelectedMatch"](this.match.id)[
+          this.match2ObjectName
+        ];
+      },
+      set(value) {
+        this.$store.commit("matches/updatePrediction", {
+          objectName: this.match2ObjectName,
+          value,
+          id: this.match.id,
+        });
+      },
     },
   },
   methods: {

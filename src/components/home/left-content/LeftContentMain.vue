@@ -33,6 +33,7 @@
         block
         rounded
         x-large
+        @click="submitPrediction"
         class="gradient-button primary--text mt-4 headline"
         :class="{ 'submit-btn': !isMobile }"
       >
@@ -62,6 +63,10 @@ export default {
   methods: {
     getMatches() {
       this.$store.dispatch("matches/getAllMatches");
+    },
+
+    submitPrediction() {
+      this.$store.dispatch("matches/submitPrediction");
     },
   },
   computed: {
