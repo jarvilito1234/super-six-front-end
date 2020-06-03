@@ -2,5 +2,17 @@
   font-family: "selawk";
   src: url(../fonts/selawk.woff);
 }
+@font-face {
+  font-family: "selawk light";
+  src: url(../fonts/selawkl.woff);
+}
 
-$body-font-family: "selawk", sans-serif;
+@font-face {
+  font-family: "selawks light";
+  src: url(../fonts/selawksl.woff);
+}
+
+@font-face {
+  font-family: "selawk bold";
+  src: url(../fonts/selawkb.woff);
+}

@@ -13,7 +13,10 @@
             <v-text-field
               :height="isMobile ? '66' : '100'"
               dark
-              type="number"
+              maxlength="2"
+              v-model="form.value"
+              @keypress="isNumber($event)"
+              type="text"
               class="score-input"
               placeholder="0"
               outlined
@@ -109,7 +112,9 @@
 export default {
   data() {
     return {
-      form: {},
+      form: {
+        value: "",
+      },
     };
   },
   props: ["match"],
@@ -125,15 +130,29 @@ export default {
       return this.$vuetify.breakpoint.smAndDown;
     },
   },
+  methods: {
+    isNumber(evt) {
+      evt = evt ? evt : window.event;
+      var charCode = evt.which ? evt.which : evt.keyCode;
+      if (
+        charCode > 31 &&
+        (charCode < 48 || charCode > 57) &&
+        charCode !== 46
+      ) {
+        evt.preventDefault();
+      } else {
+        return true;
+      }
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 ::v-deep .score-input {
-  font-family: "selawk", sans-serif !important;
   width: 100px;
   padding: -10px !important;
-  font-size: 43px;
+  font-size: 38px;
   input {
     text-align: center !important;
   }

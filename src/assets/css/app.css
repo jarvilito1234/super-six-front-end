@@ -3,13 +3,23 @@
   src: url(../fonts/selawk.woff);
 }
 
-* {
-  font-family: "selawk", sans-serif !important;
+@font-face {
+  font-family: "selawk light";
+  src: url(../fonts/selawkl.woff);
 }
 
 @font-face {
-  font-family: "selawk";
-  src: url(../fonts/selawk.woff);
+  font-family: "selawks light";
+  src: url(../fonts/selawksl.woff);
+}
+
+@font-face {
+  font-family: "selawk bold";
+  src: url(../fonts/selawkb.woff);
+}
+
+* {
+  font-family: "selawk light", sans-serif !important;
 }
 
 .v-content__wrap {

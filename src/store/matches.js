@@ -18,7 +18,7 @@ export default {
   mutations: {
     setDatas(state, payload) {
       // console.log(payload.);
-      console.log(payload.matches);
+      console.log(payload.matchData);
       state.event = payload.event;
       state.matches = payload.matches;
     },
@@ -32,9 +32,15 @@ export default {
         await axios
           .get(`${context.rootState.auth.backendUrl}/api/matches`)
           .then((response) => {
-            const data = response.data.data;
+            const datas = response.data.data;
+
+            let matchData = datas.map((data) => {
+              let matchKey1 = `match[${data.id}][match1]`;
+              let matchKey2 = `match[${data.id}][match2]`;
+              return { ...data, [matchKey1]: "", [matchKey2]: "" };
+            });
             // console.log(data);
-            context.commit("setDatas", data);
+            context.commit("setDatas", matchData);
           })
           .catch((err) => {
             console.log(err);
