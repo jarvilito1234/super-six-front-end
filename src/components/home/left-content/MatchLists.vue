@@ -13,6 +13,7 @@
             <v-text-field
               :height="isMobile ? '66' : '100'"
               dark
+              type="number"
               class="score-input"
               placeholder="0"
               outlined
@@ -39,7 +40,7 @@
                 :width="isMobile ? '50pt' : '100px'"
                 :height="isMobile ? '50pt' : '100px'"
               />
-              <div v-show="isMobile" class=" ml-n2" align="center">
+              <div v-show="isMobile" class=" ml-0" align="center">
                 {{ match.team1.chinese_name || match.team1.name }}
               </div>
             </div>
@@ -129,12 +130,21 @@ export default {
 
 <style lang="scss" scoped>
 ::v-deep .score-input {
+  font-family: "selawk", sans-serif !important;
   width: 100px;
-  padding: 10px;
+  padding: -10px !important;
   font-size: 43px;
   input {
     text-align: center !important;
   }
+}
+::v-deep input[type="number"] {
+  -moz-appearance: textfield;
+}
+::v-deep input::-webkit-outer-spin-button,
+::v-deep input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .container-web {
@@ -155,9 +165,10 @@ export default {
 
 //mobile
 
-@media only screen and (max-width: 955px) {
+@media (max-width: 955px) {
   .score-input {
-    width: 50pt;
+    min-width: 80px;
+    width: 80px;
     font-size: 30px;
   }
   .team-img {
