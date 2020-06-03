@@ -2,35 +2,22 @@ import axios from "axios";
 export default {
   namespaced: true,
   state: {
-    announcement: "",
-    event: {
-      category: {
-        name: "",
-      },
-    },
-    matches: [],
+    leaderboard: [],
   },
-  getters: {
-    matches: (state) => state.matches,
-    event: (state) => state.event,
-    // bearer: (state, getters, rootState) => `Bearer ${rootState.auth.token}`,
-  },
+  getters: {},
   mutations: {
     setDatas(state, payload) {
-      // console.log(payload.);
-      console.log(payload.matches);
-      state.event = payload.event;
-      state.matches = payload.matches;
+      console.log(payload);
     },
   },
   actions: {
-    async getAllMatches(context) {
+    async getLeaderBoards(context) {
       if (context.rootGetters["auth/isAuth"]) {
         axios.defaults.headers.common["Authorization"] =
           context.rootGetters["auth/bearer"];
 
         await axios
-          .get(`${context.rootState.auth.backendUrl}/api/matches`)
+          .get(`${context.rootState.auth.backendUrl}/api/leaderboard`)
           .then((response) => {
             const data = response.data.data;
             // console.log(data);
@@ -40,7 +27,7 @@ export default {
             console.log(err);
           });
       } else {
-        alert("You are not log in please log in");
+        return false;
       }
     },
   },

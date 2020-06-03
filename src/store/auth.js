@@ -26,7 +26,7 @@ export default {
           context.commit("setToken", token);
         })
         .catch((err) => {
-          console.log(err);
+          window.location = `${store.state.auth.backendUrl}/login?redirect_url=http://localhost:8080`;
         });
     },
   },

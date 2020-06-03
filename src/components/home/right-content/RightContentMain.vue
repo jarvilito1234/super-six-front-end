@@ -54,6 +54,10 @@ export default {
       return this.isMobile ? "header-button-mobile" : "px-0";
     },
   },
+
+  created() {
+    this.$store.dispatch("leaderboards/getLeaderBoards");
+  },
 };
 </script>
 
