@@ -46,8 +46,6 @@ export default {
       this.$store.dispatch("auth/retrieveToken", {
         access: this.$route.query.access,
       });
-
-      this.$route.replace("/");
     }
   },
   components: { MainContent },
