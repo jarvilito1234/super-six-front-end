@@ -53,6 +53,13 @@ export default {
       await this.$store.dispatch("leaderboards/getLeaderBoards");
       await this.$store.dispatch("matches/getAllMatches");
       await this.$store.dispatch("realtimePoints/getRealtimePoints");
+
+      return;
+    } else if (this.$store.getters["auth/isAuth"]) {
+      await this.$store.dispatch("matches/getAllMatches");
+      await this.$store.dispatch("leaderboards/getLeaderBoards");
+      await this.$store.dispatch("matches/getAllMatches");
+      await this.$store.dispatch("realtimePoints/getRealtimePoints");
     }
   },
   components: { MainContent },

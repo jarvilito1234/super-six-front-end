@@ -28,7 +28,7 @@
     <div class="mx-4"></div>
     <TopPlayers />
     <div class="mx-4"></div>
-    <Headlines />
+    <!-- <Headlines /> -->
   </v-card>
 </template>
 

@@ -172,32 +172,6 @@ export default {
     return {
       qrLink: false,
       chat: false,
-      menus: [
-        {
-          label: "首页",
-          link: "/",
-        },
-        {
-          label: "超六预测",
-          link: "/w",
-        },
-        {
-          label: "顺币兑换",
-          link: "rewards",
-        },
-        {
-          label: "赛事直播",
-          link: "/e",
-        },
-        {
-          label: "体育新闻",
-          link: "/s",
-        },
-        {
-          label: "我的战绩史",
-          link: "/player-center",
-        },
-      ],
 
       menuActive: "首页",
     };
@@ -211,6 +185,10 @@ export default {
   computed: {
     dataLoaded() {
       return this.$store.state.general.dataLoaded;
+    },
+
+    menus() {
+      return this.$store.state.general.menus;
     },
 
     announcement() {

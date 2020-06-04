@@ -5,6 +5,32 @@ export default {
   state: {
     announcements: [],
     dataLoaded: false,
+    menus: [
+      {
+        label: "首页",
+        link: "/",
+      },
+      {
+        label: "超六预测",
+        link: "/w",
+      },
+      {
+        label: "顺币兑换",
+        link: "rewards",
+      },
+      {
+        label: "赛事直播",
+        link: "/e",
+      },
+      {
+        label: "体育新闻",
+        link: "/s",
+      },
+      {
+        label: "我的战绩史",
+        link: "/player-center",
+      },
+    ],
   },
   getters: {
     lastAnnouncement: (state) =>

@@ -12,7 +12,13 @@
       <v-card-text>
         <v-list color="#28374E">
           <div class="mt-4">
-            <v-list-item link v-for="(menu, index) in menus" :key="index">
+            <v-list-item
+              link
+              v-for="(menu, index) in menus"
+              :key="index"
+              @click="isMenuOpen = false"
+              :to="menu.link"
+            >
               <v-list-item-content align="center">
                 <v-list-item-title
                   v-text="menu.label"
@@ -29,11 +35,16 @@
 
 <script>
 export default {
-  props: ["menus"],
   data() {
     return {
       isMenuOpen: false,
     };
+  },
+
+  computed: {
+    menus() {
+      return this.$store.state.general.menus;
+    },
   },
 };
 </script>
