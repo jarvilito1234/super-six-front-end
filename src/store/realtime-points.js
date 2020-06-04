@@ -12,17 +12,15 @@ export default {
   },
   actions: {
     async getRealtimePoints(context) {
-      if (context.rootGetters["auth/isAuth"]) {
-        axios.defaults.headers.common["Authorization"] =
-          context.rootGetters["auth/bearer"];
+      // axios.defaults.headers.common["Authorization"] =
+      //   context.rootGetters["auth/bearer"];
 
-        await axios
-          .get(`${process.env.VUE_APP_API_ROOT_URL}/api/realtime_points`)
-          .then((response) => {
-            let userPoints = response.data.data.user_points;
-            context.commit("setRealtimePoints", userPoints);
-          });
-      }
+      await axios
+        .get(`${process.env.VUE_APP_API_ROOT_URL}/api/realtime_points`)
+        .then((response) => {
+          let userPoints = response.data.data.user_points;
+          context.commit("setRealtimePoints", userPoints);
+        });
     },
   },
 };

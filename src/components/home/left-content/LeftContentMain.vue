@@ -3,7 +3,7 @@
     <img
       class="campaign ml-1"
       width="100%"
-      :height="$vuetify.breakpoint.name === 'xs' ? '120' : '266'"
+      :height="$vuetify.breakpoint.name === 'xs' ? '120' : '200px'"
       src="../../../assets/img/web_campaign.png"
     />
     <div class="divider my-n7" align="center">
@@ -16,15 +16,21 @@
         >$arrowDown</v-icon
       >
     </div>
-    <v-card class="mt-4 betting-list round-corner border-for-dark">
-      <TimeMatch :event="event" />
-      <v-divider class="border-for-dark-divider"></v-divider>
-      <MatchLists
-        v-for="(match, index) in matches"
-        :key="index"
-        :match="match"
-      />
-    </v-card>
+    <div>
+      <v-card class="mt-4 betting-list round-corner border-for-dark">
+        <div class="">
+          <TimeMatch :event="event" />
+        </div>
+
+        <v-divider class="border-for-dark-divider"></v-divider>
+        <MatchLists
+          v-for="(match, index) in matches"
+          :key="index"
+          :match="match"
+        />
+      </v-card>
+    </div>
+
     <v-container
       :style="isMobile ? 'max-width: 80%;' : 'max-width: 60%;'"
       class="primary--text text-center"
@@ -33,6 +39,7 @@
         block
         rounded
         x-large
+        v-if="this.$store.getters['auth/isAuth']"
         :disabled="this.$store.getters['matches/isPredicted']"
         @click="submitPrediction"
         class="gradient-button primary--text mt-4 headline"

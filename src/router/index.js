@@ -53,7 +53,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (!to.query.access && !store.getters["auth/isAuth"])
+  if (!to.query.access && !store.getters["auth/isAuth"] && to.name != "Home")
     window.location = `${store.state.auth.backendUrl}/login?redirect_url=${process.env.VUE_APP_ROOT_URL}`;
   else next();
 });

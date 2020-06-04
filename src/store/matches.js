@@ -23,7 +23,7 @@ export default {
     isPredicted: (state) =>
       state.matches.some(
         (match) =>
-          match.prediction_score_1 != "" || match.prediction_score_2 != ""
+          match.prediction_score_1 !== null || match.prediction_score_2 !== null
       ),
 
     predictions: (state) => {
@@ -59,32 +59,28 @@ export default {
   },
   actions: {
     async getAllMatches(context) {
-      if (context.rootGetters["auth/isAuth"]) {
-        axios.defaults.headers.common["Authorization"] =
-          context.rootGetters["auth/bearer"];
+      // axios.defaults.headers.common["Authorization"] =
+      //   context.rootGetters["auth/bearer"];
 
-        await axios
-          .get(`${context.rootState.auth.backendUrl}/api/matches`)
-          .then(async (response) => {
-            const datas = response.data.data;
+      await axios
+        .get(`${context.rootState.auth.backendUrl}/api/matches`)
+        .then(async (response) => {
+          const datas = response.data.data;
 
-            let predictions = await datas.matches.map((data) => {
-              let matchKey1 = `match[${data.id}][score_1]`;
-              let matchKey2 = `match[${data.id}][score_2]`;
-              return { id: data.id, [matchKey1]: "", [matchKey2]: "" };
-            });
-            context.commit("setDatas", {
-              predictions,
-              event: datas.event,
-              matchData: datas.matches,
-            });
-          })
-          .catch((err) => {
-            console.log(err);
+          let predictions = await datas.matches.map((data) => {
+            let matchKey1 = `match[${data.id}][score_1]`;
+            let matchKey2 = `match[${data.id}][score_2]`;
+            return { id: data.id, [matchKey1]: "", [matchKey2]: "" };
           });
-      } else {
-        alert("You are not log in please log in");
-      }
+          context.commit("setDatas", {
+            predictions,
+            event: datas.event,
+            matchData: datas.matches,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
 
     async submitPrediction(context) {
@@ -111,20 +107,6 @@ export default {
           newData[key] = value;
         });
       });
-      // const data = {
-      //   "match[7][score_1]": "2",
-      //   "match[7][score_2]": "2",
-      //   "match[8][score_1]": "2",
-      //   "match[8][score_2]": "2",
-      //   "match[9][score_1]": "2",
-      //   "match[9][score_2]": "2",
-      //   "match[10][score_1]": "2",
-      //   "match[10][score_2]": "2",
-      //   "match[11][score_1]": "2",
-      //   "match[11][score_2]": "2",
-      //   "match[12][score_1]": "2",
-      //   "match[12][score_2]": "2",
-      // };
 
       const headers = {
         Authorization: context.rootGetters["auth/bearer"],

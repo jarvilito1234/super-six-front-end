@@ -24,14 +24,13 @@
             class="d-flex align-center"
           >
             <v-btn
+              v-if="!this.$store.getters['auth/isAuth']"
               rounded
               outlined
               small
-              link
-              @click="logOutLink"
               color="secondary"
-              class="mr-2"
-              >Logout</v-btn
+              class="mr-4"
+              >登入</v-btn
             >
             <v-btn
               rounded
@@ -41,6 +40,18 @@
               class="mr-6"
               v-if="!this.$store.getters['auth/isAuth']"
               >立即注册</v-btn
+            >
+            <v-btn
+              rounded
+              outlined
+              small
+              link
+              @click="logOutLink"
+              color="secondary"
+              class="mr-2"
+              ]
+              v-else
+              >Logout</v-btn
             >
             <div style="position: relative;">
               <v-icon class="mr-4" @click="qrLink = !qrLink">$phoneLink</v-icon>
@@ -142,10 +153,27 @@
             </v-btn>
           </v-btn-toggle>
           <div class="hidden-md-and-up">
-            <!-- <v-btn rounded outlined medium color="secondary" class="mr-4"
-              >登入</v-btn
-            > -->
             <v-btn
+              v-if="!this.$store.getters['auth/isAuth']"
+              rounded
+              outlined
+              medium
+              color="secondary"
+              class="mr-4"
+              >登入</v-btn
+            >
+
+            <v-btn
+              v-if="!this.$store.getters['auth/isAuth']"
+              rounded
+              outlined
+              medium
+              color="#FFBF00"
+              class="mr-4"
+              >立即注册</v-btn
+            >
+            <v-btn
+              v-else
               rounded
               outlined
               medium

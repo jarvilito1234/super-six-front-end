@@ -42,25 +42,22 @@ export default {
     },
   },
   async created() {
-    if (this.$route.query.access && !this.$store.getters["auth/isAuth"]) {
+    if (
+      (await this.$route.query.access) &&
+      !this.$store.getters["auth/isAuth"]
+    ) {
       await this.$store.dispatch("auth/retrieveToken", {
         access: this.$route.query.access,
       });
 
       this.$router.replace("/");
-
-      await this.$store.dispatch("matches/getAllMatches");
-      await this.$store.dispatch("leaderboards/getLeaderBoards");
-      await this.$store.dispatch("matches/getAllMatches");
-      await this.$store.dispatch("realtimePoints/getRealtimePoints");
-
-      return;
-    } else if (this.$store.getters["auth/isAuth"]) {
-      await this.$store.dispatch("matches/getAllMatches");
-      await this.$store.dispatch("leaderboards/getLeaderBoards");
-      await this.$store.dispatch("matches/getAllMatches");
-      await this.$store.dispatch("realtimePoints/getRealtimePoints");
     }
+
+    this.$store.dispatch("matches/getAllMatches");
+    this.$store.dispatch("leaderboards/getLeaderBoards");
+    this.$store.dispatch("matches/getAllMatches");
+    this.$store.dispatch("realtimePoints/getRealtimePoints");
+    this.$store.dispatch("general/getAnnouncement");
   },
   components: { MainContent },
 

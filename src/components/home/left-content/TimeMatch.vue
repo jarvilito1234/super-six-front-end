@@ -1,5 +1,9 @@
 <template>
-  <v-container fluid class="py-2 matches-linear-gradient container">
+  <v-container
+    fluid
+    class="py-2 matches-linear-gradient container "
+    style="border-radius: 28px 28px 0 0;"
+  >
     <v-row>
       <v-col cols="12" class="primary--text">
         <div align="center" class="title-custom" v-if="event">

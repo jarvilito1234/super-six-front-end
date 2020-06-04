@@ -11,7 +11,7 @@
         >
           <div class="primary--text font-weight-thin">
             <v-text-field
-              :disabled="match.prediction_score_1 !== ''"
+              :disabled="match.prediction_score_1 !== null"
               :height="isMobile ? '66' : '100'"
               dark
               maxlength="2"
@@ -88,7 +88,7 @@
               <v-text-field
                 :height="isMobile ? '66' : '100'"
                 dark
-                :disabled="match.prediction_score_2 !== ''"
+                :disabled="match.prediction_score_2 !== null"
                 v-model="score2"
                 @keypress="isNumber($event)"
                 class="score-input"
