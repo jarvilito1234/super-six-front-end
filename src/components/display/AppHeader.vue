@@ -19,16 +19,19 @@
           </div>
 
           <v-spacer></v-spacer>
-          <div v-if="!$vuetify.breakpoint.smAndDown" class="d-flex">
+          <div
+            v-if="!$vuetify.breakpoint.smAndDown"
+            class="d-flex align-center"
+          >
             <v-btn
               rounded
               outlined
               small
               link
               @click="logOutLink"
-              color="#FFBF00"
+              color="secondary"
               class="mr-2"
-              >立即注册</v-btn
+              >Logout</v-btn
             >
             <v-btn
               rounded
@@ -146,10 +149,10 @@
               rounded
               outlined
               medium
-              color="#FFBF00"
+              color="secondary"
               class="mr-4"
               @click="logOutLink"
-              >立即注册</v-btn
+              >Logout</v-btn
             >
             <ExpandMenu :menus="menus" />
           </div>
