@@ -16,15 +16,15 @@
     >
     <div class="ml-6 mr-1 my-4 right-content" v-if="!isMobile">
       <PlayersList
-        v-for="(event, index) in events"
+        v-for="(player, index) in players"
         :key="index"
-        :event="event.event"
+        :player="player"
       />
     </div>
 
     <v-slide-group v-else>
-      <v-slide-item v-for="(event, index) in events" :key="index">
-        <PlayersList :event="event.event" />
+      <v-slide-item v-for="(player, index) in players" :key="index">
+        <PlayersList :player="player" />
       </v-slide-item>
     </v-slide-group>
   </v-card>
@@ -35,66 +35,7 @@ import PlayersList from "./PlayersList";
 export default {
   components: { PlayersList },
   data() {
-    return {
-      events: [
-        {
-          userName: "Skdkd11",
-          content: "竞猜第184期9月4日（欧冠16强赛）",
-          points: {
-            prize: "88,888元",
-            coin: "841顺币",
-          },
-        },
-        {
-          userName: "Skdkd11",
-          content: "竞猜第184期9月4日（欧冠16强赛）",
-          points: {
-            prize: "88,888元",
-            coin: "841顺币",
-          },
-        },
-        {
-          userName: "Skdkd11",
-          content: "竞猜第184期9月4日（欧冠16强赛）",
-          points: {
-            prize: "88,888元",
-            coin: "841顺币",
-          },
-        },
-        {
-          userName: "Skdkd11",
-          content: "竞猜第184期9月4日（欧冠16强赛）",
-          points: {
-            prize: "88,888元",
-            coin: "841顺币",
-          },
-        },
-        {
-          userName: "Skdkd11",
-          content: "竞猜第184期9月4日（欧冠16强赛）",
-          points: {
-            prize: "88,888元",
-            coin: "841顺币",
-          },
-        },
-        {
-          userName: "Skdkd11",
-          content: "竞猜第184期9月4日（欧冠16强赛）",
-          points: {
-            prize: "88,888元",
-            coin: "841顺币",
-          },
-        },
-        {
-          userName: "Skdkd11",
-          content: "竞猜第184期9月4日（欧冠16强赛）",
-          points: {
-            prize: "88,888元",
-            coin: "841顺币",
-          },
-        },
-      ],
-    };
+    return {};
   },
   computed: {
     isMobile() {
@@ -104,6 +45,14 @@ export default {
     headerButton() {
       return this.isMobile ? "header-button-mobile" : "";
     },
+
+    players() {
+      return this.$store.state.leaderboards.leaderboards;
+    },
+  },
+
+  created() {
+    this.$store.dispatch("leaderboards/getLeaderBoards");
   },
 };
 </script>

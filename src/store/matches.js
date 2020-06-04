@@ -1,4 +1,5 @@
 import axios from "axios";
+import qs from "qs";
 export default {
   namespaced: true,
   state: {
@@ -19,14 +20,19 @@ export default {
       return state.predictions.filter((match) => match.id === id);
     },
 
+    isPredicted: (state) =>
+      state.matches.some(
+        (match) =>
+          match.prediction_score_1 != "" || match.prediction_score_2 != ""
+      ),
+
     predictions: (state) => {
-      let predictionCopy = state.predictions;
+      let predictionCopy = Object.assign(state.predictions);
       let newPrediction = predictionCopy.map((prediction) => {
-        // delete prediction.id;
         return prediction;
       });
 
-      return newPrediction;
+      return predictionCopy;
     },
   },
   mutations: {
@@ -82,24 +88,54 @@ export default {
     },
 
     async submitPrediction(context) {
-      let predictions = context.state.predictions;
-      const data = await predictions.map((prediction) => {
-        let id = prediction.id;
-        let match1 = `match[${id}][score_1]`;
-        let match2 = `match[${id}][score_2]`;
-        // delete prediction.id;
-        console.log(prediction);
-        return { ...prediction[match1], ...prediction[match2] };
+      let predictions = [...context.getters.predictions];
+      let removeidPredictions = predictions.map((prediction) => {
+        delete prediction.id;
+        return prediction;
       });
 
-      debugger;
+      // const data = await removeidPredictions.reduce(
+      //   (acc, val) => [
+      //     ...acc,
+      //     ...Object.entries(val).map(([k, v]) => ({ [k]: v })),
+      //   ],
+      //   []
+      // );
+
+      let newData = {};
+
+      const data = await removeidPredictions.map((prediction) => {
+        let pred = prediction;
+        Object.entries(prediction).map((key, value) => {
+          // let pString = JSON.stringify(p);
+          newData[key] = value;
+        });
+      });
+      // const data = {
+      //   "match[7][score_1]": "2",
+      //   "match[7][score_2]": "2",
+      //   "match[8][score_1]": "2",
+      //   "match[8][score_2]": "2",
+      //   "match[9][score_1]": "2",
+      //   "match[9][score_2]": "2",
+      //   "match[10][score_1]": "2",
+      //   "match[10][score_2]": "2",
+      //   "match[11][score_1]": "2",
+      //   "match[11][score_2]": "2",
+      //   "match[12][score_1]": "2",
+      //   "match[12][score_2]": "2",
+      // };
 
       const headers = {
         Authorization: context.rootGetters["auth/bearer"],
         Accept: "application/json",
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
       };
-      axios.post(`${process.env.VUE_APP_API_ROOT_URL}/api/predictions`);
+      axios.post(
+        `${process.env.VUE_APP_API_ROOT_URL}/api/predictions`,
+        qs.stringify(newData),
+        headers
+      );
     },
   },
 };

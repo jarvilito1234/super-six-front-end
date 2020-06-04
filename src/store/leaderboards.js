@@ -2,12 +2,13 @@ import axios from "axios";
 export default {
   namespaced: true,
   state: {
-    leaderboard: [],
+    leaderboards: [],
   },
   getters: {},
   mutations: {
     setDatas(state, payload) {
       console.log(payload);
+      state.leaderboards = payload.leaderboard;
     },
   },
   actions: {

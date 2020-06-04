@@ -5,7 +5,7 @@ import auth from "./auth";
 import matches from "./matches";
 import general from "./general";
 import leaderboards from "./leaderboards";
-import points from "./points";
+import realtimePoints from "./realtime-points";
 
 Vue.use(Vuex);
 
@@ -16,7 +16,7 @@ const store = new Vuex.Store({
     matches,
     general,
     leaderboards,
-    points,
+    realtimePoints,
   },
 });
 

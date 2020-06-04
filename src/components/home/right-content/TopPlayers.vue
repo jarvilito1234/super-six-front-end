@@ -17,15 +17,15 @@
       </v-container>
 
       <TopPlayersList
-        v-for="(winner, index) in winners"
+        v-for="(point, index) in points"
         :key="index"
-        :winner="winner"
+        :point="point"
       />
     </div>
 
     <v-slide-group v-else>
-      <v-slide-item v-for="(winner, index) in winners" :key="index">
-        <TopPlayersList :winner="winner" />
+      <v-slide-item v-for="(point, index) in points" :key="index">
+        <TopPlayersList :point="point" />
       </v-slide-item>
     </v-slide-group>
   </v-card>
@@ -36,63 +36,20 @@ import TopPlayersList from "./TopPlayersList";
 export default {
   components: { TopPlayersList },
   data() {
-    return {
-      winners: [
-        {
-          userName: "aerter1979",
-          points: "100个顺币",
-        },
-        {
-          userName: "aerter1979",
-          points: "100个顺币",
-        },
-        {
-          userName: "aerter1979",
-          points: "100个顺币",
-        },
-        {
-          userName: "aerter1979",
-          points: "100个顺币",
-        },
-        {
-          userName: "aerter1979",
-          points: "100个顺币",
-        },
-        {
-          userName: "aerter1979",
-          points: "100个顺币",
-        },
-        {
-          userName: "aerter1979",
-          points: "100个顺币",
-        },
-        {
-          userName: "aerter1979",
-          points: "100个顺币",
-        },
-        {
-          userName: "aerter1979",
-          points: "100个顺币",
-        },
-        {
-          userName: "aerter1979",
-          points: "100个顺币",
-        },
-        {
-          userName: "aerter1979",
-          points: "100个顺币",
-        },
-        {
-          userName: "aerter1979",
-          points: "100个顺币",
-        },
-      ],
-    };
+    return {};
   },
   computed: {
     isMobile() {
       return this.$vuetify.breakpoint.smAndDown;
     },
+
+    points() {
+      return this.$store.state.realtimePoints.points;
+    },
+  },
+
+  created() {
+    this.$store.dispatch("realtimePoints/getRealtimePoints");
   },
 };
 </script>

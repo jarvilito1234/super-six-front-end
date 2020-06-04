@@ -33,11 +33,16 @@
         block
         rounded
         x-large
+        :disabled="this.$store.getters['matches/isPredicted']"
         @click="submitPrediction"
         class="gradient-button primary--text mt-4 headline"
         :class="{ 'submit-btn': !isMobile }"
       >
-        点击提交
+        {{
+          this.$store.getters["matches/isPredicted"]
+            ? "Already Predicted"
+            : "点击提交"
+        }}
       </v-btn>
     </v-container>
     <div v-show="!isMobile" class="mt-4 text-no-wrap text-center primary--text">

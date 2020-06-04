@@ -4,7 +4,9 @@
     color="primary--text"
     :width="isMobile ? '390px' : ''"
   >
-    <v-card-title><v-icon left>$person</v-icon>Skdkd11</v-card-title>
+    <v-card-title class="d-flex align-center"
+      ><v-icon left>$person</v-icon>{{ player.user.username }}</v-card-title
+    >
     <v-card-subtitle class="ml-8">
       <div class="secondary--text">
         竞猜第184期9月4日（欧冠16强赛）
@@ -13,15 +15,18 @@
 
     <v-card-text class="primary--text mb-3">
       <v-container fluid class="my-n8">
-        <v-row>
+        <v-row no-gutters>
           <v-col col="6">
             <div class="title">
-              <span class="prize-amount-icon mr-2"></span>128,888元
+              <span class="prize-amount-icon mr-2"></span
+              >{{ formatNumber(player.points) }}元
             </div>
           </v-col>
           <v-col col="6">
             <div class="title">
-              <span class="coin-asset-icon mr-2 text-no-wrap" />12,017顺币
+              <span class="coin-asset-icon mr-2 text-no-wrap" />{{
+                formatNumber(player.points_remaining)
+              }}顺币
             </div>
           </v-col>
         </v-row>
@@ -32,9 +37,16 @@
 
 <script>
 export default {
+  props: ["player"],
   computed: {
     isMobile() {
       return this.$vuetify.breakpoint.smAndDown;
+    },
+  },
+
+  methods: {
+    formatNumber(num) {
+      return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
     },
   },
 };

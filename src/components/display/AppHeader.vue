@@ -26,9 +26,9 @@
               small
               link
               @click="logOutLink"
-              color="secondary"
+              color="#FFBF00"
               class="mr-2"
-              >登入</v-btn
+              >立即注册</v-btn
             >
             <v-btn
               rounded
@@ -139,10 +139,16 @@
             </v-btn>
           </v-btn-toggle>
           <div class="hidden-md-and-up">
-            <v-btn rounded outlined medium color="secondary" class="mr-4"
+            <!-- <v-btn rounded outlined medium color="secondary" class="mr-4"
               >登入</v-btn
-            >
-            <v-btn rounded outlined medium color="secondary" class="mr-4"
+            > -->
+            <v-btn
+              rounded
+              outlined
+              medium
+              color="#FFBF00"
+              class="mr-4"
+              @click="logOutLink"
               >立即注册</v-btn
             >
             <ExpandMenu :menus="menus" />

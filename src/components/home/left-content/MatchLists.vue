@@ -11,6 +11,7 @@
         >
           <div class="primary--text font-weight-thin">
             <v-text-field
+              :disabled="match.prediction_score_1 !== ''"
               :height="isMobile ? '66' : '100'"
               dark
               maxlength="2"
@@ -38,7 +39,7 @@
             <div class="primary--text text-center">
               <img
                 class="team-img mb-4"
-                :src="match.team1.image"
+                :src="'http://sso.diablo88.org/' + match.team1.image"
                 alt=""
                 :width="isMobile ? '50pt' : '100px'"
                 :height="isMobile ? '50pt' : '100px'"
@@ -69,7 +70,7 @@
                 class="team-img mb-4"
                 :width="isMobile ? '50pt' : '100px'"
                 :height="isMobile ? '50pt' : '100px'"
-                :src="match.team2.image"
+                :src="'http://sso.diablo88.org/' + match.team2.image"
                 alt=""
               />
               <div v-show="isMobile" class="">
@@ -87,6 +88,7 @@
               <v-text-field
                 :height="isMobile ? '66' : '100'"
                 dark
+                :disabled="match.prediction_score_2 !== ''"
                 v-model="score2"
                 @keypress="isNumber($event)"
                 class="score-input"
@@ -137,9 +139,13 @@ export default {
 
     score1: {
       get() {
-        return this.$store.getters["matches/getSelectedMatch"](this.match.id)[
-          this.match1ObjectName
-        ];
+        if (this.match.prediction_score_1) {
+          return this.match.prediction_score_1;
+        } else {
+          return this.$store.getters["matches/getSelectedMatch"](this.match.id)[
+            this.match1ObjectName
+          ];
+        }
       },
 
       set(value) {
@@ -152,9 +158,13 @@ export default {
     },
     score2: {
       get() {
-        return this.$store.getters["matches/getSelectedMatch"](this.match.id)[
-          this.match2ObjectName
-        ];
+        if (this.match.prediction_score_2) {
+          return this.match.prediction_score_2;
+        } else {
+          return this.$store.getters["matches/getSelectedMatch"](this.match.id)[
+            this.match2ObjectName
+          ];
+        }
       },
       set(value) {
         this.$store.commit("matches/updatePrediction", {
