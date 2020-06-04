@@ -41,11 +41,18 @@ export default {
       return this.$vuetify.breakpoint.smAndDown ? "hero-mobile" : "hero-web";
     },
   },
-  mounted: function() {
+  async created() {
     if (this.$route.query.access && !this.$store.getters["auth/isAuth"]) {
-      this.$store.dispatch("auth/retrieveToken", {
+      await this.$store.dispatch("auth/retrieveToken", {
         access: this.$route.query.access,
       });
+
+      this.$router.replace("/");
+
+      await this.$store.dispatch("matches/getAllMatches");
+      await this.$store.dispatch("leaderboards/getLeaderBoards");
+      await this.$store.dispatch("matches/getAllMatches");
+      await this.$store.dispatch("realtimePoints/getRealtimePoints");
     }
   },
   components: { MainContent },

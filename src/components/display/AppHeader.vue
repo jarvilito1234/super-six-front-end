@@ -195,7 +195,7 @@ export default {
         },
         {
           label: "我的战绩史",
-          link: "/d",
+          link: "/player-center",
         },
       ],
 

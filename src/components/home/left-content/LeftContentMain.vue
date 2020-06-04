@@ -62,7 +62,7 @@ export default {
   },
 
   created() {
-    this.$store.getters["auth/isAuth"] ? this.getMatches() : "";
+    // this.$store.getters["auth/isAuth"] ? this.getMatches() : "";
   },
 
   methods: {

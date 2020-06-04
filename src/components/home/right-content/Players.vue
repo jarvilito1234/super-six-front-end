@@ -52,7 +52,7 @@ export default {
   },
 
   created() {
-    this.$store.dispatch("leaderboards/getLeaderBoards");
+    // this.$store.dispatch("leaderboards/getLeaderBoards");
   },
 };
 </script>
