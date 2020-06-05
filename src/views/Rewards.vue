@@ -1,9 +1,12 @@
 <template>
   <v-container class="custom-max-width fill-main">
-    <v-img
-      max-width="100%"
-      src="../assets/img/super6_web_rewards_banner.png"
-    ></v-img>
+    <div class="text-center">
+      <v-img
+        max-width="100%"
+        src="../assets/img/super6_web_rewards_banner.png"
+      ></v-img>
+    </div>
+
     <v-row>
       <v-col cols="12" md="8">
         <RewardMainContent />

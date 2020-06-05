@@ -37,7 +37,7 @@
               rounded
               outlined
               small
-              color="secondary"
+              color="#FFBF00"
               class="mr-6"
               v-if="!this.$store.getters['auth/isAuth']"
               >立即注册</v-btn
