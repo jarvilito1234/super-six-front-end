@@ -3,7 +3,7 @@
     flat
     :height="isMobile ? '' : '650px'"
     :color="isMobile ? 'transparent' : 'darkCardBg'"
-    class="mt-6 round-corner border-for-dark"
+    class="mt-0 round-corner border-for-dark"
   >
     <v-card-title class="title primary--text"
       ><v-icon left>$trophy</v-icon>本月竞猜大主 <v-spacer></v-spacer
@@ -14,7 +14,7 @@
         >顺币资产</span
       ></v-card-title
     >
-    <div class="ml-6 mr-1 my-4 right-content" v-if="!isMobile">
+    <div class="ml-6 mr-1 mb-2 right-content" v-if="!isMobile">
       <PlayersList
         v-for="(player, index) in players"
         :key="index"
@@ -64,7 +64,7 @@ export default {
 }
 
 .right-content {
-  max-height: 540px;
+  max-height: 560px;
   overflow-y: scroll;
   overflow-x: hidden;
 }

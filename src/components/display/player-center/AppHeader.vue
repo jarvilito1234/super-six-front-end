@@ -2,11 +2,13 @@
   <div>
     <v-app-bar app color="primaryBg" flat dark class="py-2">
       <v-toolbar-title>
-        <img
-          :width="isMobile ? '51pt' : '86'"
-          :height="isMobile ? '36pt' : '60'"
-          src="@/assets/img/Logo.png"
-        />
+        <router-link to="/">
+          <img
+            :width="isMobile ? '51pt' : '86'"
+            :height="isMobile ? '36pt' : '60'"
+            src="@/assets/img/Logo.png"
+          />
+        </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <div v-if="!isMobile" class="d-flex mr-2 align-center">

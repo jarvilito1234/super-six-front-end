@@ -1,6 +1,6 @@
 <template>
   <v-card color="transparent" flat>
-    <v-container :class="headerButton">
+    <v-container :class="headerButton" class="pt-0">
       <v-btn
         large
         :x-large="isMobile ? true : false"

@@ -8,14 +8,13 @@
     <v-card-title class="title primary--text"
       ><v-icon left>$link</v-icon>顺币实时榜</v-card-title
     >
+    <v-card-title class="mt-n4">
+      <v-btn block large rounded class="dark-gradient-bg primary--text title">
+        <span class="button-text-left">昵称</span>
+        <span class="button-text-right">获得顺币</span>
+      </v-btn>
+    </v-card-title>
     <div class="mx-4 mb-4 right-content" v-if="!isMobile">
-      <v-container>
-        <v-btn block rounded class="dark-gradient-bg primary--text title">
-          <span class="button-text-left">昵称</span>
-          <span class="button-text-right">获得顺币</span>
-        </v-btn>
-      </v-container>
-
       <TopPlayersList
         v-for="(point, index) in points"
         :key="index"
@@ -57,14 +56,14 @@ export default {
 <style lang="scss" scoped>
 .button-text-left {
   position: absolute;
-  left: 0;
+  left: 10px;
 }
 .button-text-right {
   position: absolute;
-  right: 34px;
+  right: 30px;
 }
 .right-content {
-  max-height: 540px;
+  max-height: 500px;
   overflow-y: scroll;
   overflow-x: hidden;
 }

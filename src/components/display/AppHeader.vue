@@ -124,12 +124,14 @@
     >
       <v-container class="custom-max-width">
         <v-row class="d-flex align-center">
-          <img
-            :height="$vuetify.breakpoint.mdAndDown ? '36' : '80'"
-            :width="$vuetify.breakpoint.mdAndDown ? '51' : '115'"
-            src="@/assets/img/Logo.png"
-            alt="logo"
-          />
+          <router-link to="/">
+            <img
+              :height="$vuetify.breakpoint.mdAndDown ? '36' : '80'"
+              :width="$vuetify.breakpoint.mdAndDown ? '51' : '115'"
+              src="@/assets/img/Logo.png"
+              alt="logo"
+            />
+          </router-link>
           <v-spacer></v-spacer>
 
           <v-btn-toggle
@@ -157,6 +159,7 @@
               v-if="!this.$store.getters['auth/isAuth']"
               rounded
               outlined
+              @click="login"
               medium
               color="secondary"
               class="mr-4"
@@ -168,6 +171,7 @@
               rounded
               outlined
               medium
+              @click="register"
               color="#FFBF00"
               class="mr-4"
               >立即注册</v-btn
@@ -212,6 +216,10 @@ export default {
 
     login() {
       window.location = `${process.env.VUE_APP_API_ROOT_URL}/login?redirect_url=${process.env.VUE_APP_ROOT_URL}`;
+    },
+
+    register() {
+      window.location = `${process.env.VUE_APP_API_ROOT_URL}/register?redirect_url=${process.env.VUE_APP_ROOT_URL}`;
     },
   },
   computed: {

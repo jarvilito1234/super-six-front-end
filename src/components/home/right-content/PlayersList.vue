@@ -1,10 +1,13 @@
 <template>
   <v-card
-    class="round-corner dark-gradient-bg2 border-for-dark mr-4 mb-3"
+    class="round-corner dark-gradient-bg2 border-for-dark mr-4 mb-3 "
+    :class="{ 'py-4': isMobile }"
     color="primary--text"
     :width="isMobile ? '390px' : ''"
   >
-    <v-card-title class="d-flex align-center"
+    <v-card-title
+      class="d-flex align-center"
+      :class="isMobile ? 'mt-n1' : 'mt-n3'"
       ><v-icon left>$person</v-icon>{{ player.user.username }}</v-card-title
     >
     <v-card-subtitle class="ml-8">
