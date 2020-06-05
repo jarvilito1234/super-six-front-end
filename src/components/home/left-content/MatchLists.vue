@@ -11,11 +11,11 @@
         >
           <div class="primary--text font-weight-thin">
             <v-text-field
-              :disabled="match.prediction_score_1 !== null"
+              v-model="score1"
+              :readonly="match.prediction_score_1 !== null"
               :height="isMobile ? '66' : '100'"
               dark
               maxlength="2"
-              v-model="score1"
               @keypress="isNumber($event)"
               type="text"
               class="score-input"
@@ -86,10 +86,10 @@
           <div>
             <div class="primary--text font-weight-thin">
               <v-text-field
+                v-model="score2"
                 :height="isMobile ? '66' : '100'"
                 dark
-                :disabled="match.prediction_score_2 !== null"
-                v-model="score2"
+                :readonly="match.prediction_score_2 !== null"
                 @keypress="isNumber($event)"
                 class="score-input"
                 placeholder="0"
@@ -139,7 +139,7 @@ export default {
 
     score1: {
       get() {
-        if (this.match.prediction_score_1) {
+        if (this.match.prediction_score_1 !== null) {
           return this.match.prediction_score_1;
         } else {
           return this.$store.getters["matches/getSelectedMatch"](this.match.id)[
@@ -158,7 +158,7 @@ export default {
     },
     score2: {
       get() {
-        if (this.match.prediction_score_2) {
+        if (this.match.prediction_score_2 !== null) {
           return this.match.prediction_score_2;
         } else {
           return this.$store.getters["matches/getSelectedMatch"](this.match.id)[

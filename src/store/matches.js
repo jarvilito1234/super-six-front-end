@@ -61,26 +61,50 @@ export default {
     async getAllMatches(context) {
       // axios.defaults.headers.common["Authorization"] =
       //   context.rootGetters["auth/bearer"];
+      if (!context.rootGetters["auth/isAuth"]) {
+        await axios
+          .get(`${context.rootState.auth.backendUrl}/api/matches`)
+          .then(async (response) => {
+            const datas = response.data.data;
 
-      await axios
-        .get(`${context.rootState.auth.backendUrl}/api/matches`)
-        .then(async (response) => {
-          const datas = response.data.data;
+            let predictions = await datas.matches.map((data) => {
+              let matchKey1 = `match[${data.id}][score_1]`;
+              let matchKey2 = `match[${data.id}][score_2]`;
+              return { id: data.id, [matchKey1]: "", [matchKey2]: "" };
+            });
+            context.commit("setDatas", {
+              predictions,
+              event: datas.event,
+              matchData: datas.matches,
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        axios.defaults.headers.common["Authorization"] =
+          context.rootGetters["auth/bearer"];
 
-          let predictions = await datas.matches.map((data) => {
-            let matchKey1 = `match[${data.id}][score_1]`;
-            let matchKey2 = `match[${data.id}][score_2]`;
-            return { id: data.id, [matchKey1]: "", [matchKey2]: "" };
+        await axios
+          .get(`${context.rootState.auth.backendUrl}/api/user/matches`)
+          .then(async (response) => {
+            const datas = response.data.data;
+
+            let predictions = await datas.matches.map((data) => {
+              let matchKey1 = `match[${data.id}][score_1]`;
+              let matchKey2 = `match[${data.id}][score_2]`;
+              return { id: data.id, [matchKey1]: "", [matchKey2]: "" };
+            });
+            context.commit("setDatas", {
+              predictions,
+              event: datas.event,
+              matchData: datas.matches,
+            });
+          })
+          .catch((err) => {
+            console.log(err);
           });
-          context.commit("setDatas", {
-            predictions,
-            event: datas.event,
-            matchData: datas.matches,
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      }
     },
 
     async submitPrediction(context) {

@@ -42,10 +42,7 @@ export default {
     },
   },
   async created() {
-    if (
-      (await this.$route.query.access) &&
-      !this.$store.getters["auth/isAuth"]
-    ) {
+    if (this.$route.query.access && !this.$store.getters["auth/isAuth"]) {
       await this.$store.dispatch("auth/retrieveToken", {
         access: this.$route.query.access,
       });

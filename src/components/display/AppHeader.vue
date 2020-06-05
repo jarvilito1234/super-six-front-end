@@ -1,7 +1,7 @@
 <template>
   <fragment>
     <v-system-bar
-      v-if="$route.name !== 'Login'"
+      v-if="$route.name === 'Home'"
       app
       class="background"
       height="50"
@@ -28,6 +28,7 @@
               rounded
               outlined
               small
+              @click="login"
               color="secondary"
               class="mr-4"
               >登入</v-btn
@@ -49,7 +50,6 @@
               @click="logOutLink"
               color="secondary"
               class="mr-2"
-              ]
               v-else
               >Logout</v-btn
             >
@@ -140,10 +140,10 @@
           >
             <v-btn
               exact
-              :to="menu.link"
               v-for="(menu, index) in menus"
               :key="index"
               :value="menu.label"
+              :to="menu.link"
             >
               <span
                 class="primary--text subtitle-1"
@@ -208,6 +208,10 @@ export default {
   methods: {
     logOutLink() {
       this.$store.commit("auth/logOut");
+    },
+
+    login() {
+      window.location = `${process.env.VUE_APP_API_ROOT_URL}/login?redirect_url=${process.env.VUE_APP_ROOT_URL}`;
     },
   },
   computed: {
