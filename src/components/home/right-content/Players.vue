@@ -14,25 +14,37 @@
         >顺币资产</span
       ></v-card-title
     >
-    <div class="ml-6 mr-1 mb-2 right-content" v-if="!isMobile">
-      <PlayersList
-        v-for="(player, index) in players"
-        :key="index"
-        :player="player"
-      />
-    </div>
+    <v-card-text>
+      <v-skeleton-loader
+        type="list-item-avatar-three-line"
+        class="round-corner"
+        :loading="this.$store.state.leaderboards.isLoading"
+        dark
+      >
+        <div>
+          <div class="mb-2 ml-1 right-content" v-if="!isMobile">
+            <PlayersList
+              v-for="(player, index) in players"
+              :key="index"
+              :player="player"
+            />
+          </div>
 
-    <v-slide-group v-else>
-      <v-slide-item v-for="(player, index) in players" :key="index">
-        <PlayersList :player="player" />
-      </v-slide-item>
-    </v-slide-group>
+          <v-slide-group v-else>
+            <v-slide-item v-for="(player, index) in players" :key="index">
+              <PlayersList :player="player" />
+            </v-slide-item>
+          </v-slide-group>
+        </div>
+      </v-skeleton-loader>
+    </v-card-text>
   </v-card>
 </template>
 
 <script>
 import PlayersList from "./PlayersList";
 export default {
+  inject: ["theme"],
   components: { PlayersList },
   data() {
     return {};

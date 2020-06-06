@@ -6,8 +6,11 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 import axios from "axios";
 import "./assets/css/app.scss";
+import MarqueeText from "vue-marquee-text-component";
 
 Vue.config.productionTip = false;
+
+Vue.component("marquee-text", MarqueeText);
 
 new Vue({
   router,

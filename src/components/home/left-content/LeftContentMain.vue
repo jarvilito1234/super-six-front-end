@@ -16,20 +16,29 @@
         >$arrowDown</v-icon
       >
     </div>
-    <div>
-      <v-card class="mt-4 betting-list round-corner border-for-dark">
-        <div class="">
-          <TimeMatch :event="event" />
-        </div>
 
-        <v-divider class="border-for-dark-divider"></v-divider>
-        <MatchLists
-          v-for="(match, index) in matches"
-          :key="index"
-          :match="match"
-        />
-      </v-card>
-    </div>
+    <v-skeleton-loader
+      class="mx-auto skeleton-loader"
+      elevation="24"
+      type="card"
+      dark
+      :loading="this.$store.getters['matches/isLoading']"
+    >
+      <div>
+        <v-card class="mt-4 betting-list round-corner border-for-dark">
+          <div class="">
+            <TimeMatch :event="event" />
+          </div>
+
+          <v-divider class="border-for-dark-divider"></v-divider>
+          <MatchLists
+            v-for="(match, index) in matches"
+            :key="index"
+            :match="match"
+          />
+        </v-card>
+      </div>
+    </v-skeleton-loader>
 
     <v-container
       :style="isMobile ? 'max-width: 80%;' : 'max-width: 60%;'"
@@ -63,6 +72,7 @@ import { Fragment } from "vue-fragment";
 import TimeMatch from "./TimeMatch";
 import MatchLists from "./MatchLists";
 export default {
+  inject: ["theme"],
   components: { Fragment, TimeMatch, MatchLists },
   data() {
     return {};
@@ -98,6 +108,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.skeleton-loader {
+  border-radius: 30px !important;
+}
 .campaign {
   margin-left: -10px;
 }

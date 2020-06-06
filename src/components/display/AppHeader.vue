@@ -8,14 +8,26 @@
       color="secondary--text"
     >
       <v-container class="custom-max-width">
-        <v-row class="d-flex align-center">
-          <div
-            class="d-inline-block text-truncate"
-            v-if="dataLoaded"
-            style="max-width: 600px;"
-          >
-            <v-icon class="mr-2">$soundUp</v-icon>
-            {{ announcement.announcement }}
+        <v-row class="d-flex align-">
+          <div class="d-flex align-center " style="max-width: 600px;">
+            <div>
+              <v-icon class="mr-2">$soundUp</v-icon>
+            </div>
+
+            <v-skeleton-loader
+              type="text"
+              width="600"
+              max-width="600px"
+              class="round-corner"
+              :loading="!dataLoaded"
+              dark
+              ><div>
+                <marquee-text v-if="$vuetify.breakpoint.smAndDown">
+                  <span v-if="dataLoaded">{{ announcement.announcement }}</span>
+                </marquee-text>
+                <span v-else>{{ announcement.announcement }}</span>
+              </div>
+            </v-skeleton-loader>
           </div>
 
           <v-spacer></v-spacer>
@@ -264,10 +276,11 @@ export default {
 .qr-popup {
   width: 290px;
   height: 220px;
-  transition: 0.5s;
+  transition: 0.4s;
+  opacity: 0;
   position: absolute;
   border: 1px solid #aabbd0;
-  top: -300px;
+  top: 20px;
   right: 0;
   background-color: rgba(144, 144, 144, 0.3);
   backdrop-filter: blur(20px) !important;
@@ -276,7 +289,8 @@ export default {
 
 .qr-popup-open {
   top: 50px;
-  transition: 0.4s;
+  opacity: 1;
+  transition: 0.3s;
   transition-timing-function: ease-in-out;
 }
 .chat-link {
@@ -284,19 +298,21 @@ export default {
   .chat-popup {
     width: 163px;
     height: 90px;
-    transition: 0.5s;
+    transition: 0.4s;
     position: absolute;
     border: 1px solid #aabbd0;
-    top: -230px;
+    top: 30px;
     right: -40px;
+    opacity: 0;
     background-color: rgba(116, 112, 112, 0.4);
     backdrop-filter: blur(30px) !important;
     -webkit-backdrop-filter: blur(30px) !important;
   }
 
   .chat-popup-open {
-    top: 80px;
-    transition: 0.4s;
+    top: 50px;
+    opacity: 1;
+    transition: 0.3s;
     transition-timing-function: ease-in-out;
   }
 }

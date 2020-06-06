@@ -4,6 +4,7 @@ export default {
   namespaced: true,
   state: {
     announcement: "",
+    isLoading: true,
     event: {
       category: {
         name: "",
@@ -13,6 +14,7 @@ export default {
     predictions: [],
   },
   getters: {
+    isLoading: (state) => state.isLoading,
     matches: (state) => state.matches,
     event: (state) => state.event,
     // bearer: (state, getters, rootState) => `Bearer ${rootState.auth.token}`,
@@ -42,6 +44,7 @@ export default {
       state.event = payload.event;
       state.matches = payload.matchData;
       state.predictions = payload.predictions;
+      state.isLoading = false;
     },
 
     updatePrediction(state, payload) {

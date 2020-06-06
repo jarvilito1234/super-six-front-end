@@ -8,25 +8,36 @@
     <v-card-title class="title primary--text"
       ><v-icon left>$link</v-icon>顺币实时榜</v-card-title
     >
-    <v-card-title class="mt-n4">
+    <v-card-title class="mt-n4" v-if="!isMobile">
       <v-btn block large rounded class="dark-gradient-bg primary--text title">
         <span class="button-text-left">昵称</span>
         <span class="button-text-right">获得顺币</span>
       </v-btn>
     </v-card-title>
-    <div class="mx-4 mb-4 right-content" v-if="!isMobile">
-      <TopPlayersList
-        v-for="(point, index) in points"
-        :key="index"
-        :point="point"
-      />
-    </div>
+    <v-card-text>
+      <v-skeleton-loader
+        type="list-item-avatar-three-line"
+        class="round-corner"
+        :loading="this.$store.state.realtimePoints.isLoading"
+        dark
+      >
+        <div>
+          <div class="mb-4 right-content" v-if="!isMobile">
+            <TopPlayersList
+              v-for="(point, index) in points"
+              :key="index"
+              :point="point"
+            />
+          </div>
 
-    <v-slide-group v-else>
-      <v-slide-item v-for="(point, index) in points" :key="index">
-        <TopPlayersList :point="point" />
-      </v-slide-item>
-    </v-slide-group>
+          <v-slide-group v-else>
+            <v-slide-item v-for="(point, index) in points" :key="index">
+              <TopPlayersList :point="point" />
+            </v-slide-item>
+          </v-slide-group>
+        </div>
+      </v-skeleton-loader>
+    </v-card-text>
   </v-card>
 </template>
 

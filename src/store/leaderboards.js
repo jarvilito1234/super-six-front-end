@@ -2,6 +2,7 @@ import axios from "axios";
 export default {
   namespaced: true,
   state: {
+    isLoading: true,
     leaderboards: [],
   },
   getters: {},
@@ -9,6 +10,7 @@ export default {
     setDatas(state, payload) {
       console.log(payload);
       state.leaderboards = payload.leaderboard;
+      state.isLoading = false;
     },
   },
   actions: {

@@ -1,13 +1,16 @@
 import axios from "axios";
 export default {
   namespaced: true,
+
   state: {
+    isLoading: true,
     points: [],
   },
   getters: {},
   mutations: {
     setRealtimePoints(state, payload) {
       state.points = payload;
+      state.isLoading = false;
     },
   },
   actions: {

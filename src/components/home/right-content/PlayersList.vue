@@ -16,7 +16,7 @@
       </div>
     </v-card-subtitle>
 
-    <v-card-text class="primary--text mb-3">
+    <v-card-text class="primary--text mb-3 pr-1 pl-2">
       <v-container fluid class="my-n8">
         <v-row no-gutters>
           <v-col col="6">

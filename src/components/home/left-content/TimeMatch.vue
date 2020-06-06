@@ -23,19 +23,19 @@
       <v-col cols="10" offset="1">
         <v-row justify="center" class="mt-n2 mb-3 d-flex justify-space-around">
           <div class="primary--text">
-            <div class="font-weight-thin main-text">{{ getDayDiff }}</div>
+            <div class="font-weight-thin main-text">{{ days }}</div>
             <div class="body-1 mt-n2" align="center">天</div>
           </div>
           <div class="primary--text">
-            <div class="font-weight-thin main-text">{{ getHourDiff }}</div>
+            <div class="font-weight-thin main-text">{{ hours }}</div>
             <div class="body-1 mt-n2" align="center">时</div>
           </div>
           <div class="primary--text">
-            <div class="font-weight-thin main-text">{{ getMinDiff }}</div>
+            <div class="font-weight-thin main-text">{{ minutes }}</div>
             <div class="body-1 mt-n2" align="center">分</div>
           </div>
           <div class="primary--text">
-            <div class="font-weight-thin main-text">{{ getSecDiff }}</div>
+            <div class="font-weight-thin main-text">{{ seconds }}</div>
             <div class="body-1 mt-n2" align="center">秒</div>
           </div>
         </v-row>
@@ -51,30 +51,76 @@ import differenceInMinutes from "date-fns/differenceInMinutes";
 import format from "date-fns/format";
 import differenceInSeconds from "date-fns/differenceInSeconds";
 
+import { mapState } from "vuex";
 export default {
-  props: ["event"],
   data() {
-    return {};
+    return {
+      countDownReady: false,
+      days: "",
+      hours: "",
+      seconds: "",
+      minutes: "",
+      counting: "",
+    };
   },
-  async mounted() {},
-
   computed: {
-    // event() {
-    //   return this.$store.getters['matches/event'] || "";
-    // },
-    getDayDiff() {
-      return this.event.hasOwnProperty("end_date")
-        ? differenceInDays(new Date(this.event.end_date), new Date())
-        : 0;
+    ...mapState({
+      event: (state) => state.matches.event,
+    }),
+  },
+
+  watch: {
+    async event() {
+      await this.getDayDiff();
+      await this.getHourDiff();
+      await this.getMinDiff();
+      await this.getSecDiff();
+      if (this.countDownReady) {
+        this.startCountDown();
+      }
+    },
+  },
+
+  methods: {
+    startCountDown() {
+      console.log(this.days, this.hours, this.minutes, this.seconds);
+      // this.getSecDiff--;
+      this.counting = setInterval(() => {
+        this.countDown();
+      }, 1000);
     },
 
-    getHourDiff() {
-      let getTotalHours = differenceInHours(
-        new Date(this.event.end_date),
-        new Date()
-      );
-      let subHour = this.getDayDiff ? getTotalHours - this.getDayDiff * 24 : 0;
-      return subHour < 0 ? 0 : subHour;
+    countDown() {
+      if (
+        this.days !== 0 ||
+        this.hours !== 0 ||
+        this.minutes !== 0 ||
+        this.seconds !== 0
+      ) {
+        if (this.seconds) {
+          this.seconds--;
+        } else {
+          if (this.minutes !== 1) {
+            this.minutes--;
+            this.seconds = 60;
+          } else {
+            if (this.hours !== 1) {
+              this.minutes = 59;
+              this.seconds = 60;
+              this.hours--;
+            } else {
+              if (this.days) {
+                this.days--;
+                this.hours = 23;
+                this.minutes = 60;
+                this.seconds = 60;
+              }
+            }
+          }
+        }
+      } else {
+        clearInterval(this.counting);
+      }
     },
 
     getMinDiff() {
@@ -86,8 +132,24 @@ export default {
         new Date(this.event.end_date),
         new Date()
       );
-      let subMin = this.getDayDiff ? getTotalMin - getTotalHours * 60 : "";
-      return subMin < 0 ? 0 : subMin;
+      let subMin = this.days ? getTotalMin - getTotalHours * 60 : "";
+      this.minutes = subMin < 0 ? 0 : subMin;
+    },
+
+    getDayDiff() {
+      this.days = this.event.hasOwnProperty("end_date")
+        ? differenceInDays(new Date(this.event.end_date), new Date())
+        : 0;
+    },
+
+    getHourDiff() {
+      let getTotalHours = differenceInHours(
+        new Date(this.event.end_date),
+        new Date()
+      );
+      let subHour = this.days ? getTotalHours - this.days * 24 : 0;
+
+      this.hours = subHour < 0 ? 0 : subHour;
     },
 
     getSecDiff() {
@@ -99,16 +161,10 @@ export default {
         new Date(this.event.end_date),
         new Date()
       );
-      let subSec = this.getDayDiff ? getTotalSec - totalMin * 60 : "";
-      return subSec < 0 ? 0 : subSec;
-    },
-  },
+      let subSec = this.days ? getTotalSec - totalMin * 60 : "";
 
-  methods: {
-    countDayLeft() {
-      if (event) {
-        console.log(event);
-      }
+      this.seconds = subSec < 0 ? 0 : subSec;
+      this.countDownReady = true;
     },
   },
 };
