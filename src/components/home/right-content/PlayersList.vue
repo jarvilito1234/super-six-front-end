@@ -2,6 +2,7 @@
   <div class="round-corner dark-gradient-bg2 border-for-dark mr-4 mb-3">
     <v-card
       dark
+      flat
       :class="{ 'py-4': isMobile }"
       color="transparent"
       :width="isMobile ? '390px' : ''"

@@ -17,7 +17,7 @@
 
     <v-hover v-slot:default="{ hover }" open-delay="100">
       <v-btn
-        :class="hover ? 'we-chat-hover' : 'we-chat-not-hover'"
+        :class="hover ? 'elevation-24' : 'elevation-0'"
         class="we-chat"
         large
         fixed
@@ -37,7 +37,7 @@
     </v-hover>
     <v-hover v-slot:default="{ hover }" open-delay="100">
       <v-btn
-        :class="hover ? 'we-chat-hover' : 'we-chat-not-hover'"
+        :class="hover ? 'elevation-24' : 'elevation-0'"
         large
         fixed
         fab
@@ -80,6 +80,7 @@ export default {
 <style scoped>
 .we-chat {
   margin-bottom: 80px;
+  left: 15px;
 }
 .we-chat-not-hover {
   transition: 0.3s;
