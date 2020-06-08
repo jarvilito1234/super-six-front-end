@@ -25,7 +25,11 @@
                 <marquee-text v-if="$vuetify.breakpoint.smAndDown">
                   <span v-if="dataLoaded">{{ announcement.announcement }}</span>
                 </marquee-text>
-                <span v-else>{{ announcement.announcement }}</span>
+                <div v-else>
+                  <span v-if="dataLoaded">
+                    {{ announcement.announcement }}</span
+                  >
+                </div>
               </div>
             </v-skeleton-loader>
           </div>

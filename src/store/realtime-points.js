@@ -11,7 +11,6 @@ export default {
     setRealtimePoints(state, payload) {
       state.points = payload;
       state.isLoading = false;
-      s;
     },
   },
   actions: {

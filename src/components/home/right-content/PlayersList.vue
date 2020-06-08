@@ -1,10 +1,9 @@
 <template>
-  <div class="round-corner dark-gradient-bg2 border-for-dark mr-4 mb-3">
+  <div>
     <v-card
-      dark
-      flat
+      class="round-corner dark-gradient-bg2 border-for-dark mr-4 mb-3 "
       :class="{ 'py-4': isMobile }"
-      color="transparent"
+      color="primary--text"
       :width="isMobile ? '390px' : ''"
     >
       <v-card-title
