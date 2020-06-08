@@ -1,128 +1,8 @@
+import axios from "axios";
 export default {
   namespaced: true,
   state: {
-    rewards: [
-      {
-        imageUrl: require("@/assets/img/rewards/reward1.png"),
-        title: "腾讯Q币20元",
-        points: 1000,
-        isHot: true,
-      },
-      {
-        imageUrl: require("@/assets/img/rewards/reward1.png"),
-        title: "腾讯Q币20元",
-        points: 1000,
-        isHot: true,
-      },
-      {
-        imageUrl: require("@/assets/img/rewards/reward1.png"),
-        title: "腾讯Q币20元",
-        points: 1000,
-        isHot: false,
-      },
-      {
-        imageUrl: require("@/assets/img/rewards/reward1.png"),
-        title: "腾讯Q币20元",
-        points: 4,
-        isHot: false,
-      },
-      {
-        imageUrl: require("@/assets/img/rewards/reward1.png"),
-        title: "腾讯Q币20元",
-        points: 5,
-        isHot: false,
-      },
-      {
-        imageUrl: require("@/assets/img/rewards/reward1.png"),
-        title: "腾讯Q币20元",
-        points: 1000,
-        isHot: true,
-      },
-      {
-        imageUrl: require("@/assets/img/rewards/reward1.png"),
-        title: "腾讯Q币20元",
-        points: 1000,
-        isHot: true,
-      },
-      {
-        imageUrl: require("@/assets/img/rewards/reward1.png"),
-        title: "腾讯Q币20元",
-        points: 1000,
-        isHot: false,
-      },
-      {
-        imageUrl: require("@/assets/img/rewards/reward1.png"),
-        title: "腾讯Q币20元",
-        points: 4,
-        isHot: false,
-      },
-      {
-        imageUrl: require("@/assets/img/rewards/reward1.png"),
-        title: "腾讯Q币20元",
-        points: 5,
-        isHot: false,
-      },
-      {
-        imageUrl: require("@/assets/img/rewards/reward1.png"),
-        title: "腾讯Q币20元",
-        points: 1000,
-        isHot: true,
-      },
-      {
-        imageUrl: require("@/assets/img/rewards/reward1.png"),
-        title: "腾讯Q币20元",
-        points: 1000,
-        isHot: true,
-      },
-      {
-        imageUrl: require("@/assets/img/rewards/reward1.png"),
-        title: "腾讯Q币20元",
-        points: 1000,
-        isHot: false,
-      },
-      {
-        imageUrl: require("@/assets/img/rewards/reward1.png"),
-        title: "腾讯Q币20元",
-        points: 4,
-        isHot: false,
-      },
-      {
-        imageUrl: require("@/assets/img/rewards/reward1.png"),
-        title: "腾讯Q币20元",
-        points: 5,
-        isHot: false,
-      },
-      {
-        imageUrl: require("@/assets/img/rewards/reward1.png"),
-        title: "腾讯Q币20元",
-        points: 1000,
-        isHot: true,
-      },
-      {
-        imageUrl: require("@/assets/img/rewards/reward1.png"),
-        title: "腾讯Q币20元",
-        points: 1000,
-        isHot: true,
-      },
-      {
-        imageUrl: require("@/assets/img/rewards/reward1.png"),
-        title: "腾讯Q币20元",
-        points: 1000,
-        isHot: false,
-      },
-      {
-        imageUrl: require("@/assets/img/rewards/reward1.png"),
-        title: "腾讯Q币20元",
-        points: 4,
-        isHot: false,
-      },
-      {
-        imageUrl: require("@/assets/img/rewards/reward1.png"),
-        title: "腾讯Q币20元",
-        points: 5,
-        isHot: false,
-      },
-    ],
+    rewards: [],
   },
 
   getters: {
@@ -132,6 +12,27 @@ export default {
 
     getHotRewards(state) {
       return state.rewards.filter((reward) => reward.isHot);
+    },
+  },
+
+  mutations: {
+    setRewards(state, payload) {
+      state.rewards = payload.rewards;
+    },
+  },
+  actions: {
+    async getRewards(context) {
+      axios.defaults.headers.common["Authorization"] =
+        context.rootGetters["auth/bearer"];
+
+      await axios
+        .get(`${process.env.VUE_APP_API_ROOT_URL}/api/rewards`)
+        .then((response) => {
+          console.log(response);
+          context.commit("setRewards", {
+            rewards: response.data.data.rewards,
+          });
+        });
     },
   },
 };

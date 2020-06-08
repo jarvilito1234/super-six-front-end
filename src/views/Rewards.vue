@@ -23,6 +23,9 @@ import Popular from "@/components/rewards/Popular";
 import RewardMainContent from "@/components/rewards/RewardMainContent";
 export default {
   components: { RewardMainContent, Popular },
+  created() {
+    this.$store.dispatch("rewards/getRewards");
+  },
 };
 </script>
 
