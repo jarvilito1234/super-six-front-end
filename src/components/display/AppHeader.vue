@@ -66,7 +66,11 @@
               >Logout</v-btn
             >
             <div style="position: relative;">
-              <v-icon class="mr-4" @click="qrLink = !qrLink">$phoneLink</v-icon>
+              <v-icon
+                class="mr-4"
+                @click="$store.commit('general/toggleQrLink')"
+                >$phoneLink</v-icon
+              >
               <!-- qr dialog -->
               <div
                 class="round-corner my-0 qr-popup primary--text"
@@ -107,7 +111,9 @@
               </div>
             </div>
             <div class="chat-link">
-              <v-icon @click="chat = !chat">$chat</v-icon>
+              <v-icon @click="$store.commit('general/toggleChat')"
+                >$chat</v-icon
+              >
 
               <!-- chat link -->
               <div
@@ -214,9 +220,6 @@ export default {
   components: { Fragment, ExpandMenu },
   data() {
     return {
-      qrLink: false,
-      chat: false,
-
       menuActive: "首页",
     };
   },
@@ -235,6 +238,13 @@ export default {
     },
   },
   computed: {
+    qrLink() {
+      return this.$store.state.general.qrLink;
+    },
+
+    chat() {
+      return this.$store.state.general.chat;
+    },
     dataLoaded() {
       return this.$store.state.general.dataLoaded;
     },
@@ -250,11 +260,10 @@ export default {
 
   watch: {
     qrLink() {
-      this.qrLink ? (this.chat = false) : "";
+      this.qrLink ? this.$store.commit("general/closeChat") : "";
     },
-
     chat() {
-      this.chat ? (this.qrLink = false) : "";
+      this.chat ? this.$store.commit("general/closeQrLink") : "";
     },
   },
 

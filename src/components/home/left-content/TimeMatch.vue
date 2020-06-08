@@ -104,7 +104,7 @@ export default {
             this.minutes--;
             this.seconds = 60;
           } else {
-            if (this.hours !== 1) {
+            if (this.hours !== 1 && this.minutes !== 1) {
               this.minutes = 59;
               this.seconds = 60;
               this.hours--;
@@ -112,7 +112,14 @@ export default {
               if (this.days) {
                 this.days--;
                 this.hours = 23;
-                this.minutes = 60;
+                this.minutes = 59;
+                this.seconds = 60;
+              } else if (this.hours === 1 && this.days === 0) {
+                this.hours = 0;
+                this.minutes = 59;
+                this.seconds = 60;
+              } else if (this.minutes === 1 && this.hours === 0) {
+                this.minutes = 0;
                 this.seconds = 60;
               }
             }

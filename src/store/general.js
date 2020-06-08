@@ -3,6 +3,8 @@ export default {
   namespaced: true,
 
   state: {
+    qrLink: false,
+    chat: false,
     announcements: [],
     dataLoaded: false,
     menus: [
@@ -41,6 +43,21 @@ export default {
       console.log(payload);
       state.announcements = payload.payload;
       state.dataLoaded = true;
+    },
+
+    toggleQrLink(state) {
+      state.qrLink = !state.qrLink;
+    },
+    toggleChat(state) {
+      state.chat = !state.chat;
+    },
+
+    closeQrLink(state) {
+      state.qrLink = false;
+    },
+
+    closeChat(state) {
+      state.chat = false;
     },
   },
   actions: {

@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" @click="closeModal">
     <div class="hero">
       <v-container class="custom-max-width">
         <div class="banner-text">
@@ -58,7 +58,12 @@ export default {
   },
   components: { MainContent },
 
-  methods: {},
+  methods: {
+    closeModal() {
+      this.$store.commit("general/closeQrLink");
+      this.$store.commit("general/closeChat");
+    },
+  },
 };
 </script>
 

@@ -57,13 +57,25 @@ html {
 }
 
 .gradient-button {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#37aee1), to(#197f7d));
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#37aee1),
+    to(#197f7d)
+  );
   background-image: linear-gradient(180deg, #37aee1, #197f7d);
   border: 0.5px solid #31fef9;
 }
 
 .gradient-blue-green {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#37aee1), to(#197f7d));
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#37aee1),
+    to(#197f7d)
+  );
   background-image: linear-gradient(180deg, #37aee1, #197f7d);
 }
 
@@ -144,8 +156,8 @@ html {
   display: flex;
   padding: 10px 10px 10px 50px !important;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
 .dialog-content {
@@ -154,7 +166,13 @@ html {
 }
 
 .reward-linear-gradient {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#071b3c), to(#03132e));
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#071b3c),
+    to(#03132e)
+  );
   background-image: linear-gradient(180deg, #071b3c, #03132e);
 }
 
@@ -162,7 +180,13 @@ html {
   position: relative;
   margin-top: 95px;
   border-radius: 30px 30px 0px 0px !important;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#37aee1), to(#197f7d)) !important;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#37aee1),
+    to(#197f7d)
+  ) !important;
   background-image: linear-gradient(180deg, #37aee1, #197f7d) !important;
 }
 
